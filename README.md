@@ -119,11 +119,12 @@ In this section we will walk through the steps required to create a new auction 
 1. Add two buttons to the bottom of this form:
     - `Cancel`: On click redirect to `/dashboard`
 	- `Post`: On click perform a `POST` request to `/auction/new`
-1. Implement a `POST /auction/new` route that inserts the above information from `req.body` into the `auctions` table. Once successfully inserted redirect the user to `/auction/:id`, where `id` is the `id` of the new auction item that was just created.
+1. Implement a `POST /auction/new` route that inserts the above information from `req.body` into the `auction` table. Once successfully inserted redirect the user to `/auction/:id`, where `id` is the `id` of the new auction item that was just created.
 1. Implement a `GET /auction/:id` route that renders `auction.hbs` for an auction with an `id` entered as a param
-    - Select the auction where the `id` matches the `id` in `req.query`, and pass in all of the auction details to `auction.hbs`
+    - Select the auction where the `id` matches the `id` in `req.query`, and join this information with the details for the pokemon being sold (found in the `pokemon` table). Pass in all of the auction details to `auction.hbs`.
 1. Create an `auction.hbs` view that displays an overview of the selected auction. If the auction is still ongoing users should be able to edit the auction details.
     - Users should be able to edit auction details and click an `Update` button (similar to the `profile.hbs` view)
+	- There should be an `<img>` element that renders the image from the thumbnail_url stored in the `pokemon` table
 	- Users should be able to DELETE the selected auction
 	- **If the auction has expired users should not be able to modify/delete the auction**
 1. Create a link on `auction.hbs` that redirects the user back to `/dashboard`
@@ -144,4 +145,13 @@ By the end of this section you should be able to follow the below workflow:
 Congratulations you're almost done creating your very own Pokemon auction site.
 
 ## Part 4: View ALL Auctions
- // TODO
+By the end of this part we will be able to display all running auctions on `dashboard.hbs`.
+
+1. Modify your `GET /dashboard` route to send an array of all auctions (incl. Pokemon `type` and `thumbnail_link`) to `dashboard.hbs`. You should join the `auction` and `pokemon` tables on pokemon id, and then select all of the returned entries.
+1. In `dashboard.hbs` create a **sortable** list of all auctions
+    - Display the current highest bid on all OPEN auctions, and the winning bid (also highest bid) on all CLOSED auctions
+    - You may want to use an external library to handle displaying and sorting the auctions (like [this one](https://datatables.net/))
+	- You should also display an image using the `thumbnail_url` for each auction
+	- Create a **Bid** button for all OPEN auctions that have not been submitted by the current user
+	- **CLOSED** auctions should not have a Bid button, and should be greyed out
+1. Make sure the **Bid** buttons all link to `/auction/bid/:auctionId` (with each button referring to its' own auction id)
