@@ -121,11 +121,12 @@ In this section we will walk through the steps required to create a new auction 
 	- `Post`: On click perform a `POST` request to `/auction/new`
 1. Implement a `POST /auction/new` route that inserts the above information from `req.body` into the `auction` table. Once successfully inserted redirect the user to `/auction/:id`, where `id` is the `id` of the new auction item that was just created.
 1. Implement a `GET /auction/:id` route that renders `auction.hbs` for an auction with an `id` entered as a param
-    - Select the auction where the `id` matches the `id` in `req.query`, and join this information with the details for the pokemon being sold (found in the `pokemon` table). Pass in all of the auction details to `auction.hbs`.
+    - Select the auction where the `id` matches the `id` in `req.query`, and join this information with the details for the pokemon being sold (found in the `pokemon` table). The result should be joined with the `bids` table on the auction id, and then you should pass in all of the auction details to `auction.hbs`.
 1. Create an `auction.hbs` view that displays an overview of the selected auction. If the auction is still ongoing users should be able to edit the auction details.
     - Users should be able to edit auction details and click an `Update` button (similar to the `profile.hbs` view)
 	- There should be an `<img>` element that renders the image from the thumbnail_url stored in the `pokemon` table
 	- Users should be able to DELETE the selected auction
+	- Users should be able to see the current highest bid **OR** `"No Bids"` if no bids have been placed yet
 	- **If the auction has expired users should not be able to modify/delete the auction**
 1. Create a link on `auction.hbs` that redirects the user back to `/dashboard`
 
@@ -147,11 +148,54 @@ Congratulations you're almost done creating your very own Pokemon auction site.
 ## Part 4: View ALL Auctions
 By the end of this part we will be able to display all running auctions on `dashboard.hbs`.
 
-1. Modify your `GET /dashboard` route to send an array of all auctions (incl. Pokemon `type` and `thumbnail_link`) to `dashboard.hbs`. You should join the `auction` and `pokemon` tables on pokemon id, and then select all of the returned entries.
-1. In `dashboard.hbs` create a **sortable** list of all auctions
+1. Modify your `GET /dashboard` route to join the `bids` and `auction` tables on the auction id attribute, and then send all data (incl. Pokemon `type` and `thumbnail_link`) to `dashboard.hbs`. You should join the `auction` and `bids` tables on auction id, and then join that with the `pokemon` table on pokemon id. Then select all of the returned entries.
+1. In `dashboard.hbs` create a **sortable** list of all auctions. You may want to use an external library to handle displaying and sorting the auctions (like [this one](https://datatables.net/)).
     - Display the current highest bid on all OPEN auctions, and the winning bid (also highest bid) on all CLOSED auctions
-    - You may want to use an external library to handle displaying and sorting the auctions (like [this one](https://datatables.net/))
+	- If no bid exists, display the `starting_bid` of the auction in its place
 	- You should also display an image using the `thumbnail_url` for each auction
-	- Create a **Bid** button for all OPEN auctions that have not been submitted by the current user
+	- Create a **Bid** button and an `<input>` field for the `bid_amount` for all OPEN auctions not been submitted by the current user
 	- **CLOSED** auctions should not have a Bid button, and should be greyed out
-1. Make sure the **Bid** buttons all link to `/auction/bid/:auctionId` (with each button referring to its' own auction id)
+1. Make sure the **Bid** buttons all `POST` the `bid_amount` to `/auction/bid/:auctionId` (with each button referring to its own auction id)
+
+## Part 5: Bid on Running Auction
+This module will walk you through setting up an endpoint to handle new bid requests.
+
+1. Implement a `POST /auction/bid/:auctionId` endpoint that takes in a `bid_amount` in the request body and a `auctionId` in the request params. This endpoint should have the following functionality:
+    1. Select the max bid where the auction id matches the one in `req.params`
+	1. **IF** there is no bid present, verify that the `bid_amount` in the request body is >= the `starting_bid` for this auction
+	1. **IF** there is a bid present, verify that the `bid_amount` is >= the current maximum bid + $0.50 (is at least $0.50 higher than the current highest bid) **AND** that the current maximum bid was not made by the current user
+	1. Insert the new bid to the bids table alone with the `auctionId` and the user id for the current user
+	1. Redirect the user to the `/auction/:id` route where `id` is the `auctionId` entered in the request params
+
+### Goal (Part 4 + Part 5)
+By the end of this section you should be able to:
+
+- Navigate to the Dashboard
+- See a list of ALL running & closed auctions
+- Auctions belonging to the current user & Expired Auctions will **NOT** have a Bid button
+    - all other auctions should display an `<input>` field for `bid_amount` and a **Bid** button
+- Bid a value >= current max bid + $0.50 on the auction
+- Be redirected to the auction profile page (`/auction/:id`)
+- See their bid as the max bid
+- Try to bid again, but fail
+- Users should see the current max bid for all open auctions
+- Users should see the winning bid amount for all closed auctions
+- Users should not be able to bid any amount that is less than the current max bid plus 50 cents
+
+## Part 6: Winners
+You're almost done! Try and implement the following functionality without any instructions:
+
+- Allow users to filter auctions by OPEN and CLOSED
+- Display the username of the highest bidder for CLOSED auctions
+
+## Congrats!
+You've successfully completed the PokeBay exercise! If you want to keep going and take on some more challenging tasks, below are a bunch of bonuses that you can attempt!
+
+## Bonus
+Here are some additional cool features you can add to your app!
+
+- Use the `reserve_price` attribute from our auctions table and ONLY close an auction if the maximum bid meets the reserve price. If it doesn't quite meet the reserve price, denote the auction as `"Not Filled"`.
+- Create `ratings` and `comments` tables and allow users to rate other users they've done business with
+    - The ratings & comments for a user should show up on a user's profile
+- Once an auction expires, notify the winner and auction owner via text (use the Twilio API)
+- Create a **watchlist** on the Dashboard (a list of auctions that the user has favourited and can see at a quick glance at the top of their dashboard)
