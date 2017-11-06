@@ -6,6 +6,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var passport = require('passport');
 var LocalStrategy = require('passport-local');
+var session = require('cookie-session');
+
 var auth = require('./routes/auth');
 var routes = require('./routes/routes');
 var db = require('./pool.js');
@@ -23,6 +25,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({keys: [process.env.SECRET || 'h0r1z0n5']}))
 
 // Passport
 passport.serializeUser(function(user, done) {
@@ -37,6 +40,10 @@ passport.use(new LocalStrategy(function(username, password, done) {
   // YOUR CODE HERE
 }));
 
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Routes
 app.use('/', auth(passport, db));
 app.use('/', routes(db));
 

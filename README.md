@@ -22,7 +22,7 @@ Let's create a local postgres database and launch the provided starter code!
 	    ![](./images/setupDone.png)
 		
 ## Part 1: User Login/Registration
-In this part we will set up our login and register routes. We will be working out of the `routes/auth.js` file for the following set of steps.
+In this part we will set up our login and register routes. We will be working out of the `routes` folder for the following set of steps.
 
 1. Implement a `GET /login` route which renders the provided `login.hbs` file
     - Navigating to `http://localhost:3000/login` should render a login form
@@ -36,5 +36,26 @@ In this part we will set up our login and register routes. We will be working ou
 	- **Bonus:** Using [`bcrypt`](https://www.npmjs.com/package/bcrypt) hash the passwords when they're stored in your database
 1. Implement a `POST /login` route that redirects to `/dashboard` on success and `/login` on failure
 1. Implement a `POST /register` route that checks if username is already take and if `req.body.password` & `req.body.password2` match
+1. Open `routes/routes.js` and add the following code snippet where it says `// YOUR CODE HERE`. This will redirect non-logged in clients to the `/login` route
+    ```js
+	router.use(function(req, res, next) {
+	  if (! req.user) {
+        res.redirect('/login');
+	  } else {
+        next();
+	  }
+	});
+	```
+1. Implement a `GET /dashboard` route that renders `dashboard.hbs` (**NOTE:** You will have to create this view)
+    - This route should ONLY be visible to presently logged in users
+
+### Goal
+After successfully completing **Part 1** you should be able to:
+
+- Create a **new** user
+- Login successfully using an existing user
+- Handle Login/Registration errors
+- Navigate to `dashboard.hbs` proceeding a successful login
+- Once users are created use [`pgweb`](https://github.com/sosedoff/pgweb) to take a look at your `USERS` table. It should contain the created users, with the appropriate attributes.
 
 ## Part 2: Profile
