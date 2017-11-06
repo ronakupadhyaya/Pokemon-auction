@@ -2,6 +2,11 @@
 
 Using the Schema you designed yesterday, you will create your very own Pokemon auction site! We will use `handlebars` for the frontend (some views will be provided to you) and `pg` as our PostgreSQL client.
 
+This is a 2-day exercise, so be sure to pace yourself appropriately. We've recommended a good stopping point between Day 1 & Day 2, but feel free to keep going and take a stab at the bonuses.
+
+- [Day 1](#day-1)
+- [Day 2](#day-2)
+
 ### Before You Begin!
 In order to do this exercise you will need to have done the following:
 
@@ -9,6 +14,9 @@ In order to do this exercise you will need to have done the following:
 - Created & Populated a table for all Pokemon information
 
 The above tasks were carried out in class preceeding this exercise. If you don't have one of the above tasks completed, make sure you get the code from a peer.
+
+# Day 1
+Let's Begin!
 
 ## Part 0: Setup
 Let's create a local postgres database and launch the provided starter code!
@@ -43,7 +51,7 @@ In this part we will set up our login and register routes. We will be working ou
 	- To implement `LocalStorage` you should use `db.query` to write a query that looks for a `user` given its' `username` and `password`.
 	- **Bonus:** Using [`bcrypt`](https://www.npmjs.com/package/bcrypt) hash the passwords when they're stored in your database
 1. Implement a `POST /login` route that redirects to `/dashboard` on success and `/login` on failure
-1. Implement a `POST /register` route that checks if username is already take and if `req.body.password` & `req.body.password2` match. If no modifications were made to the `register.hbs` file, then your `req.body` will have the following keys:
+1. Implement a `POST /register` route that checks if username is already taken and if `req.body.password` & `req.body.password2` match. If no modifications were made to the `register.hbs` file, then your `req.body` will have the following keys:
     - `username`
 	- `password`
 	- `password2` (password confirmation)
@@ -97,6 +105,43 @@ By the end of this section you should be able to:
 - Navigate back to the dashboard from the profile page
 
 ## Part 3: New Auction
-In this section we will walk through the steps required to create a new auction page. This page will allow users to select Pokemon, set a starting bid, set a reserve price, write a description, and set a duration.
+In this section we will walk through the steps required to create a new auction page. This page will allow users to select Pokemon, set a starting bid, set a reserve price, write a description, and set a duration. **Note** that before you begin this section you should already have a pre-populated **Pokemon** table.
 
-// TODO
+1. Add a link on `dashboard.hbs` that points to the `/auction/new` route
+1. Implement a `GET /auction/new` route that renders `newAuction.hbs`
+1. Create a `newAuction.hbs` view that contains the following elements:
+    - `pokemon_name`: users should be able to select the pokemon from a searchable dropdown ([example](https://semantic-ui.com/modules/dropdown.html))
+	- `starting_bid`: the price at which the user's auction begins
+	- `reserve_price`: the minimum price the user is willing to accept for the given item **(must not be lower than the `starting_bid`)**
+	- `shipping`: the location where the item will be shipped from
+	- `description`: a description of the item
+	- `length`: the amount of time to allow bidding on this auction **(minimum 1 hour)**
+1. Add two buttons to the bottom of this form:
+    - `Cancel`: On click redirect to `/dashboard`
+	- `Post`: On click perform a `POST` request to `/auction/new`
+1. Implement a `POST /auction/new` route that inserts the above information from `req.body` into the `auctions` table. Once successfully inserted redirect the user to `/auction/:id`, where `id` is the `id` of the new auction item that was just created.
+1. Implement a `GET /auction/:id` route that renders `auction.hbs` for an auction with an `id` entered as a param
+    - Select the auction where the `id` matches the `id` in `req.query`, and pass in all of the auction details to `auction.hbs`
+1. Create an `auction.hbs` view that displays an overview of the selected auction. If the auction is still ongoing users should be able to edit the auction details.
+    - Users should be able to edit auction details and click an `Update` button (similar to the `profile.hbs` view)
+	- Users should be able to DELETE the selected auction
+	- **If the auction has expired users should not be able to modify/delete the auction**
+1. Create a link on `auction.hbs` that redirects the user back to `/dashboard`
+
+### Goal
+By the end of this section you should be able to follow the below workflow:
+
+- Navigate to `http://localhost:3000/dashboard`and click on a **New Auction** button
+- Search for and select a Pokemon from a dropdown
+- Enter auction information (`starting_bid`, `reserve_price`, `shipping`, `description`, `length`)
+- Click the **Cancel** button and return to `/dashboard`
+- Create a new auction and click on **Post**
+- View an editable overview of the recently created auction
+- View a **read-only** overview of an expired auction
+- Navigate to `/dashboard` from the auction overview page
+
+# Day 2
+Congratulations you're almost done creating your very own Pokemon auction site.
+
+## Part 4: View ALL Auctions
+ // TODO
