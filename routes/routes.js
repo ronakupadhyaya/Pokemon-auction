@@ -8,7 +8,25 @@ module.exports = function(db) {
     res.render('index', {title: 'PokeBay'});
   });
 
-  // YOUR CODE HERE
+  router.use((req, res, next) => {
+    if (! req.user) {
+      res.redirect('/login');
+    } else {
+      next();
+    }
+  });
+
+  router.get('/dashboard', (req, res, next) => {
+    res.render('dashboard');
+  });
+
+  router.get('/auction/new', (req, res, next) => {
+    res.render('newAuction');
+  });
+
+  router.post('/auction/new', (req, res, next) => {
+    res.redirect('/dashboard');
+  });
 
   router.get('/profile', (req, res) => {
     const requser = {first_name: 'jeff', last_name: 'tang', street_adress: '450 9th St.', city: 'San Francisco', state: 'CA', zipcode: 94109, username: 'tangsauce', password: 'baseball', email: 'jeff@gmail.com', phone: 5134263380};

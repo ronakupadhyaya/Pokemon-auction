@@ -29,23 +29,35 @@ app.use(session({keys: [process.env.SECRET || 'h0r1z0n5']}));
 
 // Passport
 passport.serializeUser(function(user, done) {
-  // YOUR CODE HERE
+  done(null, user.id);
 });
 
 passport.deserializeUser(function(id, done) {
-  // YOUR CODE HERE
+  db.query('select * from users where id = $1', [id])
+  .then(function(result){
+    done(null, result.rows[0]);
+  })
+  .catch(function(err){
+    console.log(err);
+  });
 });
 
 passport.use(new LocalStrategy(function(username, password, done) {
-  // YOUR CODE HERE
+  db.query('select * from users where username = $1 and password = $2', [username, password])
+  .then(function(result){
+    done(null, result.rows[0]);
+  })
+  .catch(function(err){
+    console.log(err);
+  });
 }));
 
 app.use(passport.initialize());
 app.use(passport.session());
 
 // Routes
-app.use('/', auth(passport));
-app.use('/', routes());
+app.use('/', auth(passport, db));
+app.use('/', routes(db));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
