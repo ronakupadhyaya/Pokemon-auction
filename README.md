@@ -1,6 +1,6 @@
 # PokeBay
 
-Using the Schema you designed yesterday, you will create your very own Pokemon auction site! We will use `handlebars` for the frontend (some views will be provided to you) and `pg` as our PostgreSQL client.
+Using the Schema you designed today, you will create your very own Pokemon auction site! We will use `handlebars` for the frontend (some views will be provided to you) and `pg` as our PostgreSQL client.
 
 This is a 2-day exercise, so be sure to pace yourself appropriately. We've recommended a good stopping point between Day 1 & Day 2, but feel free to keep going and take a stab at the bonuses.
 
