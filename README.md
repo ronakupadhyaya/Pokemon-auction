@@ -48,8 +48,8 @@ In this part we will set up our login and register routes. We will be working ou
     - Navigate to `app.js` and find the `// Passport` comment. You have to implement the proceeding functions.
 	- For `passport.serializeUser` you should call `done()` with `null` as the first argument and the user id as the second argument.
 	- For `passport.deserializeUser` you should use `db.query` to select a user from the `users` database with a given `id`. Once the user is found call `done()` with `null` as the first argument and the result as the second argument.
-	- To implement `LocalStorage` you should use `db.query` to write a query that looks for a `user` given its' `username` and `password`.
-	- **Bonus:** Using [`bcrypt`](https://www.npmjs.com/package/bcrypt) hash the passwords when they're stored in your database
+	- To implement `LocalStrategy` you should use `db.query` to write a query that looks for a `user` given its' `username` and `password`.
+	- **Bonus:** Use [`bcrypt`](https://www.npmjs.com/package/bcrypt) to hash the passwords when they're stored in your database
 1. Implement a `POST /login` route that redirects to `/dashboard` on success and `/login` on failure
 1. Implement a `POST /register` route that checks if username is already taken and if `req.body.password` & `req.body.password2` match. If no modifications were made to the `register.hbs` file, then your `req.body` will have the following keys:
     - `username`
@@ -72,7 +72,7 @@ In this part we will set up our login and register routes. We will be working ou
 	  }
 	});
 	```
-1. Implement a `GET /dashboard` route that renders `dashboard.hbs` (**NOTE:** You will have to create this view)
+1. Implement a `GET /dashboard` authenticated route (a user has to be logged in to access this route) that renders `dashboard.hbs` (**NOTE:** You will have to create this view)
     - This route should ONLY be visible to presently logged in users
 
 ### Goal
@@ -121,8 +121,8 @@ In this section we will walk through the steps required to create a new auction 
 	- `Post`: On click perform a `POST` request to `/auction/new`
 1. Implement a `POST /auction/new` route that inserts the above information from `req.body` into the `auction` table. Once successfully inserted redirect the user to `/auction/:id`, where `id` is the `id` of the new auction item that was just created.
 1. Implement a `GET /auction/:id` route that renders `auction.hbs` for an auction with an `id` entered as a param
-    - Select the auction where the `id` matches the `id` in `req.query`, and join this information with the details for the pokemon being sold (found in the `pokemon` table). The result should be joined with the `bids` table on the auction id, and then you should pass in all of the auction details to `auction.hbs`.
-1. Create an `auction.hbs` view that displays an overview of the selected auction. If the auction is still ongoing users should be able to edit the auction details.
+    - Select the auction where the `id` matches the `id` in `req.query`, and join this information with the details of the pokemon being sold (found in the `pokemon` table). You will also need to select the max bid for all bids where the auction id matches `req.params.id`. Then you should pass in all of these details to `auction.hbs`.
+1. Create an `auction.hbs` view that displays an overview of the selected auction. If the auction is still ongoing, users should be able to edit the auction details.
     - Users should be able to edit auction details and click an `Update` button (similar to the `profile.hbs` view)
 	- There should be an `<img>` element that renders the image from the thumbnail_url stored in the `pokemon` table
 	- Users should be able to DELETE the selected auction
@@ -148,7 +148,7 @@ Congratulations you're almost done creating your very own Pokemon auction site.
 ## Part 4: View ALL Auctions
 By the end of this part we will be able to display all running auctions on `dashboard.hbs`.
 
-1. Modify your `GET /dashboard` route to join the `bids` and `auction` tables on the auction id attribute, and then send all data (incl. Pokemon `type` and `thumbnail_link`) to `dashboard.hbs`. You should join the `auction` and `bids` tables on auction id, and then join that with the `pokemon` table on pokemon id. Then select all of the returned entries.
+1. Modify your `GET /dashboard` route to display all auctions, along with the corresponding maximum bid and pokemon details. One way to execute this would be to find the max of the `bids` table when grouped by auction id, and then join this with all auctions by auction id. You will also need to join this information with the Pokemon thumbnail url and type attributes from the `pokemon` table.
 1. In `dashboard.hbs` create a **sortable** list of all auctions. You may want to use an external library to handle displaying and sorting the auctions (like [this one](https://datatables.net/)).
     - Display the current highest bid on all OPEN auctions, and the winning bid (also highest bid) on all CLOSED auctions
 	- If no bid exists, display the `starting_bid` of the auction in its place
@@ -164,8 +164,8 @@ This module will walk you through setting up an endpoint to handle new bid reque
     1. Select the max bid where the auction id matches the one in `req.params`
 	1. **IF** there is no bid present, verify that the `bid_amount` in the request body is >= the `starting_bid` for this auction
 	1. **IF** there is a bid present, verify that the `bid_amount` is >= the current maximum bid + $0.50 (is at least $0.50 higher than the current highest bid) **AND** that the current maximum bid was not made by the current user
-	1. Insert the new bid to the bids table alone with the `auctionId` and the user id for the current user
-	1. Redirect the user to the `/auction/:id` route where `id` is the `auctionId` entered in the request params
+	1. Insert the new bid to the bids table along with the `auctionId` and the user id for the current user
+	1. Redirect the user to the `/auction/:id` route where `id` is the `auctionId` that was entered in the request params
 
 ### Goal (Part 4 + Part 5)
 By the end of this section you should be able to:
@@ -176,7 +176,7 @@ By the end of this section you should be able to:
     - all other auctions should display an `<input>` field for `bid_amount` and a **Bid** button
 - Bid a value >= current max bid + $0.50 on the auction
 - Be redirected to the auction profile page (`/auction/:id`)
-- See their bid as the max bid
+- Ensure that the bid that was just made in an above step is the current max bid
 - Try to bid again, but fail
 - Users should see the current max bid for all open auctions
 - Users should see the winning bid amount for all closed auctions
