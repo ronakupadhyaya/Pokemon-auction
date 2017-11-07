@@ -21,8 +21,7 @@ Let's Begin!
 ## Part 0: Setup
 Let's create a local postgres database and launch the provided starter code!
 
-1. Use the [`createdb`](https://www.postgresql.org/docs/9.6/static/tutorial-createdb.html) terminal command to create your very own pokebay database
-    ![](./images/newDB.png)
+1. Use the `CREATE DATABASE` statement to create a database named `pokebay`
 1. Create an `env.sh` file and set the `DATABASE_URL` environment variable (don't forget to run `source env.sh` following this step)
 1. Open `pool.js` and fill in the missing lines of code (found at `//YOUR CODE HERE`)
     - This file will connect to your postgres database and export the `pg` variable
