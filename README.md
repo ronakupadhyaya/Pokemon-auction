@@ -23,6 +23,7 @@ Let's create a local postgres database and launch the provided starter code!
 
 1. Use the `CREATE DATABASE` statement to create a database named `pokebay`
 1. Create an `env.sh` file and set the `DATABASE_URL` environment variable (don't forget to run `source env.sh` following this step)
+1. Install the `db-migrate` and `db-migrate-pg` NPM packages with `npm install --save`.
 1. Open `pool.js` and fill in the missing lines of code (found at `//YOUR CODE HERE`)
     - This file will connect to your postgres database and export the `pg` variable
 1. In `app.js` import `pool.js` as the variable `db` (we will use this variable to write SQL queries). Since these queries will be written in our `routes/*` files, you should pass the `db` variable in to those files as an argument (as shown below). Modify `app.js` to include the below code, and make changes to `auth.js` & `routes.js` to account for the `db` argument.
