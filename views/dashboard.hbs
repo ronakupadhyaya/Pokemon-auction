@@ -2,3 +2,25 @@
 
 <a class="btn btn-primary" href="/profile">Profile</a>
 <a class="btn btn-primary" href="/auction/new">New Auction</a>
+
+<div>
+  <h3>All Auctions</h3>
+	<table id='auction_table'>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Max Bid</th>
+				<th>Type</th>
+				<th>Image</th>
+			</tr>
+		</thead>
+	{{#each auctions}}
+		<tr>
+			<th>{{this.name}}</th>
+			<th>{{this.max}}</th>
+			<th>{{this.type}}</th>
+			<th><img src='{{this.picture}}' /></th>
+		</tr>
+  {{/each}}
+	<table>
+</div>

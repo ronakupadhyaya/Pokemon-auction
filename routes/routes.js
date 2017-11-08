@@ -16,6 +16,25 @@ module.exports = function(db) {
     }
   });
 
+  router.get('/dashboard', (req, res, next) => {
+    getAuctions();
+    async function getAuctions() {
+      try {
+        const auctions = (await db.query(`
+        select max(bid), b.id, p.name, p.type, p.picture from bids b
+					left outer join auctions a on b.fk_auctions=a.id
+					left outer join pokemon p on a.fk_pokemon=p.id
+					group by b.id, p.name, p.type, p.picture
+        `)).rows;
+        console.log(auctions);
+        res.render('dashboard', {auctions});
+      }
+      catch (err) {
+        console.log(err);
+      }
+    }
+  });
+
   router.get('/profile', (req, res) => {
     res.render('profile', {title: 'Profile', user: req.user});
   });
