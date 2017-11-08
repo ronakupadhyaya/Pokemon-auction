@@ -1,14 +1,34 @@
 <div class='container-profile'>
   <h3>View or Update Profile</h3>
-    <form action='POST' method='profile'>
+    <form action='/profile' method='POST'>
+
       <div class='form-group'>
-        first_name <input class='form-control' name='first_name' type='text' value={{user.first_name}} />
+        username <input class='form-control' name='username' type='text' value='{{user.username}}' />
       </div>
       <div class='form-group'>
-        last_name <input class='form-control' name='last_name' type='text' value={{user.last_name}} />
+        password <input class='form-control' name='password' type='text' value='{{user.password}}' />
       </div>
-      TODO: continue for other fields
-      please enter password to submit changes <input name='passwordSubmit' type='password' />
-      <input class='form-control' type='submit' value='submit' />
+      <div class='form-group'>
+        street_address <input class='form-control' name='street_address' type='text' value='{{user.street_address}}' />
+      </div>
+      <div class='form-group'>
+        city <input class='form-control' name='city' type='text' value='{{user.city}}' />
+      </div>
+      <div class='form-group'>
+        state <input class='form-control' name='state' type='text' value='{{user.state}}' />
+      </div>
+      <div class='form-group'>
+        zipcode <input class='form-control' name='zipcode' type='number' value='{{user.zipcode}}' />
+      </div>
+      <div class='form-group'>
+        email <input class='form-control' name='email' type='text' value='{{user.email}}' />
+      </div>
+      <div class='form-group'>
+        phone <input class='form-control' name='phone' type='number' value='{{user.phone}}' />
+      </div>
+
+      please enter your current password to submit changes
+      <input class='form-control' placeholder='passwordSubmit' name='passwordSubmit' type='password' value='' />
+      <button class='btn btn-primary' >submit</button>
     </form>
 </div>
