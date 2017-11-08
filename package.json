@@ -20,5 +20,7 @@
     "pg": "^7.4.0",
     "serve-favicon": "~2.3.0",
     "underscore": "^1.8.3"
+    "semantic-ui": "^2.2.13",
+    "serve-favicon": "~2.3.0"
   }
 }

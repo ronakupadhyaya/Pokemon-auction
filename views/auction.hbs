@@ -1,0 +1,14 @@
+<h3>Auction page</h3>
+
+<p>Pokemon: {{auction.name}}</p>
+<p>Description: {{auction.description}}</p>
+<img src={{auction.picture}}>
+<p>Shipping Location: {{auction.shipping_location}}</p>
+<p>Opening Bid: ${{auction.opening_bid}}</p>
+<a class="btn btn-primary" href="/bid/{{auction.id}}">Place Bid</a>
+
+
+{{#if editable}}
+<a class="btn btn-primary" href="/edit/auction/{{auction.id}}">Edit</a>
+<a class="btn btn-primary" href="/delete/{{auction.id}}">Delete Auction</a>
+{{/if}}
