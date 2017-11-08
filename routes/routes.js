@@ -6,7 +6,5 @@ module.exports = function(db) {
     res.render('index', {title: 'PokeBay'});
   });
 
-  // YOUR CODE HERE
-
   return router;
 }

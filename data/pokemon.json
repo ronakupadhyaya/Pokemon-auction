@@ -1,0 +1,257 @@
+[
+  {
+    "name": "Bulbasaur",
+    "image_url": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/001.png",
+    "type": "grass"
+  },
+  {
+    "name": "Ivysaur",
+    "image_url": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/002.png",
+    "type": "grass"
+  },
+  {
+    "name": "Venusaur",
+    "image_url": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/003.png",
+    "type": "grass"
+  },
+  {
+    "name": "Venusaur",
+    "image_url": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/003.png",
+    "type": "grass"
+  },
+  {
+    "name": "Charmander",
+    "image_url": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/004.png",
+    "type": "fire"
+  },
+  {
+    "name": "Charmeleon",
+    "image_url": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/005.png",
+    "type": "fire"
+  },
+  {
+    "name": "Charizard",
+    "image_url": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/006.png",
+    "type": "fire"
+  },
+  {
+    "name": "Charizard",
+    "image_url": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/006.png",
+    "type": "fire"
+  },
+  {
+    "name": "Charizard",
+    "image_url": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/006.png",
+    "type": "fire"
+  },
+  {
+    "name": "Squirtle",
+    "image_url": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/007.png",
+    "type": "water"
+  },
+  {
+    "name": "Wartortle",
+    "image_url": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/008.png",
+    "type": "water"
+  },
+  {
+    "name": "Blastoise",
+    "image_url": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/009.png",
+    "type": "water"
+  },
+  {
+    "name": "Blastoise",
+    "image_url": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/009.png",
+    "type": "water"
+  },
+  {
+    "name": "Caterpie",
+    "image_url": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/010.png",
+    "type": "bug"
+  },
+  {
+    "name": "Metapod",
+    "image_url": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/011.png",
+    "type": "bug"
+  },
+  {
+    "name": "Butterfree",
+    "image_url": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/012.png",
+    "type": "bug"
+  },
+  {
+    "name": "Weedle",
+    "image_url": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/013.png",
+    "type": "bug"
+  },
+  {
+    "name": "Kakuna",
+    "image_url": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/014.png",
+    "type": "bug"
+  },
+  {
+    "name": "Beedrill",
+    "image_url": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/015.png",
+    "type": "bug"
+  },
+  {
+    "name": "Beedrill",
+    "image_url": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/015.png",
+    "type": "bug"
+  },
+  {
+    "name": "Pidgey",
+    "image_url": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/016.png",
+    "type": "normal"
+  },
+  {
+    "name": "Pidgeotto",
+    "image_url": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/017.png",
+    "type": "normal"
+  },
+  {
+    "name": "Pidgeot",
+    "image_url": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/018.png",
+    "type": "normal"
+  },
+  {
+    "name": "Pidgeot",
+    "image_url": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/018.png",
+    "type": "normal"
+  },
+  {
+    "name": "Rattata",
+    "image_url": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/019.png",
+    "type": "dark"
+  },
+  {
+    "name": "Rattata",
+    "image_url": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/019.png",
+    "type": "normal"
+  },
+  {
+    "name": "Raticate",
+    "image_url": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/020.png",
+    "type": "dark"
+  },
+  {
+    "name": "Raticate",
+    "image_url": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/020.png",
+    "type": "normal"
+  },
+  {
+    "name": "Spearow",
+    "image_url": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/021.png",
+    "type": "normal"
+  },
+  {
+    "name": "Fearow",
+    "image_url": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/022.png",
+    "type": "normal"
+  },
+  {
+    "name": "Ekans",
+    "image_url": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/023.png",
+    "type": "poison"
+  },
+  {
+    "name": "Arbok",
+    "image_url": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/024.png",
+    "type": "poison"
+  },
+  {
+    "name": "Pikachu",
+    "image_url": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/025.png",
+    "type": "electric"
+  },
+  {
+    "name": "Raichu",
+    "image_url": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/026.png",
+    "type": "electric"
+  },
+  {
+    "name": "Raichu",
+    "image_url": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/026.png",
+    "type": "electric"
+  },
+  {
+    "name": "Sandshrew",
+    "image_url": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/027.png",
+    "type": "ice"
+  },
+  {
+    "name": "Sandshrew",
+    "image_url": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/027.png",
+    "type": "ground"
+  },
+  {
+    "name": "Sandslash",
+    "image_url": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/028.png",
+    "type": "ice"
+  },
+  {
+    "name": "Sandslash",
+    "image_url": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/028.png",
+    "type": "ground"
+  },
+  {
+    "name": "Nidoran♀",
+    "image_url": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/029.png",
+    "type": "poison"
+  },
+  {
+    "name": "Nidorina",
+    "image_url": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/030.png",
+    "type": "poison"
+  },
+  {
+    "name": "Nidoqueen",
+    "image_url": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/031.png",
+    "type": "poison"
+  },
+  {
+    "name": "Nidoran♂",
+    "image_url": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/032.png",
+    "type": "poison"
+  },
+  {
+    "name": "Nidorino",
+    "image_url": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/033.png",
+    "type": "poison"
+  },
+  {
+    "name": "Nidoking",
+    "image_url": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/034.png",
+    "type": "poison"
+  },
+  {
+    "name": "Clefairy",
+    "image_url": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/035.png",
+    "type": "fairy"
+  },
+  {
+    "name": "Clefable",
+    "image_url": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/036.png",
+    "type": "fairy"
+  },
+  {
+    "name": "Vulpix",
+    "image_url": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/037.png",
+    "type": "ice"
+  },
+  {
+    "name": "Vulpix",
+    "image_url": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/037.png",
+    "type": "fire"
+  },
+  {
+    "name": "Ninetales",
+    "image_url": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/038.png",
+    "type": "ice"
+  },
+  {
+    "name": "Ninetales",
+    "image_url": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/038.png",
+    "type": "fire"
+  }
+]
