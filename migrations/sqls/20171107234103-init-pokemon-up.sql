@@ -1,8 +1,8 @@
 /* Replace with your SQL commands */
 CREATE TABLE users (
   id serial primary key,
-  first_name varchar not null,
-  last_name varchar not null,
+  first_name varchar,
+  last_name varchar,
   street_address varchar,
   city varchar,
   state varchar,

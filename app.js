@@ -35,11 +35,33 @@ passport.serializeUser(function(user, done) {
 
 passport.deserializeUser(function(id, done) {
   // YOUR CODE HERE
-  
+  db.query(`SELECT id from users WHERE id = $1;`, [id])
+    .then((result) => {
+      let user = result.rows;
+      if (!user) {done(false, false);}
+      else {done(false, user);}
+    })
+    .catch((err) => {
+      done(err);
+      console.log(err);
+    });
 });
 
 passport.use(new LocalStrategy(function(username, password, done) {
   // YOUR CODE HERE
+  db.query(`SELECT * FROM users WHERE username = $1;`, [username])
+    .then((result) => {
+      console.log('User', result.rows[0]);
+      let user = result.rows[0];
+      if (!user) { return done(null, false); }
+      if (user.password !== password) {
+        return done(null, false, { message: 'Incorrect password.' });
+      }
+      return done(null, user);
+    })
+    .catch((err) => {
+      if (err) { return done(err); }
+    });
 }));
 
 app.use(passport.initialize());
