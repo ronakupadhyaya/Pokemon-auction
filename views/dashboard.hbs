@@ -1,0 +1,18 @@
+<h1>{{title}}</h1>
+<p>Welcome to the dash</p>
+<a href="/profile">profile</a>
+<br>
+<a href="/auction/new">Create a new auction</a>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<ul>
+  {{#each auctions}}
+    <li>
+      <a href="/auction/{{id}}">{{name}}</a>
+    </li>
+  {{/each}}
+</ul>

@@ -40,7 +40,7 @@ passport.deserializeUser(function(id, done) {
   [id]
   )
   .then((result) => {
-    done(null, result);
+    done(null, result.rows[0]);
   })
   .catch((err) => {
     console.log(err);

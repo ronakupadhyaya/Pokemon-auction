@@ -27,7 +27,6 @@ CREATE TABLE auctions (
   length INT,
   shipping_location TEXT,
   description TEXT,
-  finished BOOLEAN,
   created_at TIMESTAMP DEFAULT NOW()
 );
 

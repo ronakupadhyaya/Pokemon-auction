@@ -41,7 +41,7 @@ module.exports = function(passport, db) {
               body.phone, body.street, body.city,
               body.state, body.country, body.postal]
           ).then((result) => {
-            res.render('login')
+            res.redirect('/login')
           })
         }
       })
