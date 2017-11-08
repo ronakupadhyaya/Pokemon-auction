@@ -1,33 +1,50 @@
 <div class='container-profile'>
   <h3>View or Update Profile</h3>
+
+  {{#if error}}
+  <div class="alert alert-danger" role="alert">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    <span class="sr-only">Error:</span>
+    {{error}}
+  </div>
+  {{/if}}
+
     <form action='/profile' method='POST'>
 
       <div class='form-group'>
-        username <input class='form-control' name='username' type='text' value='{{user.username}}' />
+        <label for='username'>username</label>
+        <input class='form-control' name='username' type='text' value='{{user.username}}' />
       </div>
       <div class='form-group'>
-        password <input class='form-control' name='password' type='text' value='{{user.password}}' />
+        <label for='password'>password</label>
+        <input class='form-control' name='password' type='password' value='{{user.password}}' />
       </div>
       <div class='form-group'>
-        street_address <input class='form-control' name='street_address' type='text' value='{{user.street_address}}' />
+        <label for='street_address'>street_address</label>
+        <input class='form-control' name='street_address' type='text' value='{{user.street_address}}' />
       </div>
       <div class='form-group'>
-        city <input class='form-control' name='city' type='text' value='{{user.city}}' />
+        <label for='city'>city</label>
+        <input class='form-control' name='city' type='text' value='{{user.city}}' />
       </div>
       <div class='form-group'>
-        state <input class='form-control' name='state' type='text' value='{{user.state}}' />
+        <label for='state'>state</label>
+        <input class='form-control' name='state' type='text' value='{{user.state}}' />
       </div>
       <div class='form-group'>
-        zipcode <input class='form-control' name='zipcode' type='number' value='{{user.zipcode}}' />
+        <label for='zipcode'>zipcode</label>
+        <input class='form-control' name='zipcode' type='number' value='{{user.zipcode}}' />
       </div>
       <div class='form-group'>
-        email <input class='form-control' name='email' type='text' value='{{user.email}}' />
+        <label for='email'>email</label>
+        <input class='form-control' name='email' type='text' value='{{user.email}}' />
       </div>
       <div class='form-group'>
-        phone <input class='form-control' name='phone' type='number' value='{{user.phone}}' />
+        <label for='phone'>phone</label>
+        <input class='form-control' name='phone' type='number' value='{{user.phone}}' />
       </div>
 
-      please enter your current password to submit changes
+      <label for='passwordSubmit'>please enter your current password to submit changes</label>
       <input class='form-control' placeholder='passwordSubmit' name='passwordSubmit' type='password' value='' />
       <button class='btn btn-primary' >submit</button>
     </form>
