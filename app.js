@@ -30,22 +30,52 @@ app.use(session({keys: [process.env.SECRET || 'h0r1z0n5']}))
 // Passport
 passport.serializeUser(function(user, done) {
   // YOUR CODE HERE
+  done(null, user.id);
 });
 
 passport.deserializeUser(function(id, done) {
   // YOUR CODE HERE
+  db.query(`select * from users where id = $1`, [id], (err, res) => {
+    if(err) {
+      console.log(err);
+      done(err, null);
+    }  else {
+      if(res.rows.length > 0){
+        console.log('found matching user in deserializeUser');
+        done(null, res.rows[0]);
+      }  else {
+        console.log('length not greater than 0');
+        done('error', null);
+      }
+    }
+  })
 });
 
 passport.use(new LocalStrategy(function(username, password, done) {
   // YOUR CODE HERE
+  db.query(`select * from users where username = $1 and password = $2`, [username, password])
+  .then(res => {
+    if(res.rows.length > 0){
+      console.log('found matching user in local strategy');
+      return done(null, res.rows[0]);
+    }  else {
+      return done(null, false);
+    }
+
+    // done(res.rows[0], null)
+  })
+  .catch(err => {
+    console.log('caught error in localstrategy: ', err);
+    done(err, null)
+  })
 }));
 
 app.use(passport.initialize());
 app.use(passport.session());
 
 // Routes
-app.use('/', auth(passport));
-app.use('/', routes());
+app.use('/', auth(passport, db));
+app.use('/', routes(db));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -66,6 +96,3 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
-
-
-
