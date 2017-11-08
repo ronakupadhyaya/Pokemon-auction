@@ -148,8 +148,52 @@ Congratulations you're almost done creating your very own Pokemon auction site.
 ## Part 4: View ALL Auctions
 By the end of this part we will be able to display all running auctions on `dashboard.hbs`.
 
-1. Modify your `GET /dashboard` route to display all auctions, along with the corresponding maximum bid and pokemon details. One way to execute this would be to find the max of the `bids` table when grouped by auction id, and then join this with all auctions by auction id. You will also need to join this information with the Pokemon thumbnail url and type attributes from the `pokemon` table.
+1. Modify your `GET /dashboard` route to display all auctions, along with the corresponding maximum bid and pokemon details. One way to execute this would be to find the max of the `bids` table when grouped by auction id, and then join this with all auctions on auction id. You will also need to join this information with the Pokemon thumbnail url and type attributes from the `pokemon` table.
 1. In `dashboard.hbs` create a **sortable** list of all auctions. You may want to use an external library to handle displaying and sorting the auctions (like [this one](https://datatables.net/)).
+    
+	<details><summary>
+    **[Hint]** Using DataTables
+    </summary><p>
+    
+	1. Modify `views/layout.hbs` to include the following link to the `<head>`
+	    ```js
+		<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
+		```
+	1. Modify `views/layout.hbs` to include the following script tag to the end of your `<body>`
+	    ```js
+		<script type="text/javascript" charset="utf8" src="/DataTables/datatables.js"></script>
+		```
+	1. Create an HTML `<table>` for your auction data. The table will have the below format, and the column headers can be set in the `<thead>` element.
+	    ```js
+		<table id="table_id">
+		  <thead>
+		    <tr>
+			  <th>Column Header 1</th>
+			  <th>Column Header 2</th>
+		  </thead>
+		  <tbody>
+		    <tr>
+			  <td>Row 1 Cell 1</td>
+			  <td>Row 1 Cell 2</td>
+			</tr>
+			<tr>
+			  <td>Row 2 Cell 1</td>
+			  <td>Row 2 Cell 2</td>
+			</tr>
+		  </tbody>
+		</table>
+		```
+	1. Navigate to `public/js/script.js` and call the `DataTables()` function on the element you just created. This function call should take place within the `$(document).ready()` function (i.e. if your table had `id="table_id"` we would write the following:
+	    ```js
+		$(document).ready( function () {
+		  $('#table_id').DataTable();
+		});
+		```
+	1. If you want to make the tables look similar to the rest of your app you may apply some [custom styles](https://datatables.net/manual/styling/theme-creator). **Note** that these styles would go in the `public/stylesheets/styles.css` file.
+	1. You should now see your shiny new sortable tables!
+
+    </p></details>
+
     - Display the current highest bid on all OPEN auctions, and the winning bid (also highest bid) on all CLOSED auctions
 	- If no bid exists, display the `starting_bid` of the auction in its place
 	- You should also display an image using the `thumbnail_url` for each auction
