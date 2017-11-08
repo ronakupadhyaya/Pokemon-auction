@@ -152,7 +152,7 @@ By the end of this part we will be able to display all running auctions on `dash
 1. In `dashboard.hbs` create a **sortable** list of all auctions. You may want to use an external library to handle displaying and sorting the auctions (like [this one](https://datatables.net/)).
     
 	<details><summary>
-    **[Hint]** Using DataTables
+    Using DataTables (Hint)
     </summary><p>
     
 	1. Modify `views/layout.hbs` to include the following link to the `<head>`
@@ -193,6 +193,8 @@ By the end of this part we will be able to display all running auctions on `dash
 	1. You should now see your shiny new sortable tables!
 
     </p></details>
+	
+	<br/>
 
     - Display the current highest bid on all OPEN auctions, and the winning bid (also highest bid) on all CLOSED auctions
 	- If no bid exists, display the `starting_bid` of the auction in its place
