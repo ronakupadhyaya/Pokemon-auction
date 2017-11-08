@@ -1,0 +1,36 @@
+<div class='center'>
+  <h1> Create a new auction </h1>
+  <form action='/auction/new' method='POST' id='new-auction'>
+    <div class="form-group">
+      <label for="poke_name">Pokemon Name </label>
+      <select name="name" id="poke_name" class="form-control">
+        <option value="">Pokemon Name</option>
+        {{#each pokemon}}
+          <option value={{this.name}}>{{this.name}}</option>
+        {{/each}}
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="opening_bid">Starting Bid</label>
+      <input type="number" name="opening_bid" class="form-control" id="opening_bid" placeholder="Opening Bid">
+    </div>
+    <div class="form-group">
+      <label for="reserve_price">Reserve Price</label>
+      <input type="text" name="reserve_price" class="form-control" id="reserve_price" placeholder="Reserve Price">
+    </div>
+    <div class="form-group">
+      <label for="shipping_location">Shipping Location of Pokemon</label>
+      <input type="text" class="form-control" name="shipping_location" id="shipping_location" placeholder="Shipping Location">
+    </div>
+    <div class="form-group">
+      <label for="description">Description of Pokemon</label>
+      <input type="text" class="form-control" name="description" id="description" placeholder="Description of Pokemon">
+    </div>
+    <div class="form-group">
+      <label for="auction_length">Amount of time allowed for bidding (Min. 1 hour)</label>
+      <input type="number" class="form-control" name="auction_length" id="auction_length" placeholder="Auction Length">
+    </div>
+    <button class="btn btn-info" type="submit">Create Auction</button>
+    <a href="/dashboard" class="btn btn-danger"> Cancel </a>
+  </form>
+  <div>

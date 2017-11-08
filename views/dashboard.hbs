@@ -2,3 +2,62 @@
 <p>Welcome to your dashboard</p>
 
 <p><a href='/profile'> Edit your profile </a></p>
+<p><a href='/auction/new'> Create auction </a></p>
+
+<h2> Auction View </h2>
+<div style="color: red">{{error}}</div>
+<table id="table_id" class="display">
+  <thead>
+    <tr>
+      <th>
+        Current Highest Bid
+      </th>
+      <th>
+        Pokemon Name
+      </th>
+      <th>
+        Pokemon Type
+      </th>
+      <th>
+        Pokemon pic
+      </th>
+      <th>
+      </th>
+
+    </tr>
+  </thead>
+    <tbody>
+      {{#each auctions}}
+
+        <tr class="{{this.status}}">
+          {{#if this.max_bid}}
+          <td>${{this.max_bid}}</td>
+          {{else}}
+          <td>${{this.opening_bid}}</td>
+          {{/if}}
+          <td>{{this.name}} </td>
+          <td>{{this.type}} </td>
+          <td><img src="{{this.img_url}}"></td>
+          {{#if this.iscreatedbyuser}}
+            <td></td>
+          {{else}}
+            <td>
+            <form action="/auction/bid/{{this.id}}/{{this.max_bid}}/{{this.opening_bid}}" method="POST" style="display: inline-block">
+              <input name="amount" type="number" placholder="Bid amount">
+              <button class="btn btn-info" type="submit">Submit </a>
+            </form>
+          </td>
+          {{/if}}
+        </tr>
+      {{/each}}
+    </tbody>
+</table>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.filter.html.js"></script>
+<script>
+$(document).ready(function(){
+  $('#table_id').DataTable();
+});
+</script>

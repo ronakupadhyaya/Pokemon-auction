@@ -1,0 +1,45 @@
+<div class="center">
+  <h1> Auction for {{auction.name}}</h1>
+  <img src="{{auction.img_url}}">
+  <p> Starting Bid: {{auction.opening_bid}} </p>
+  {{#if maxBid}}
+  <p> Maximum Bid : {{maxBid}} </p>
+  {{else}}
+  <p> There have been no bids </p>
+  {{/if}}
+  {{#if stillRunning}}
+  <p> This auction is still running! </p>
+  <form action='/auction/edit/{{auction.id}}' method='POST' id='edit-auction'>
+    <div class="form-group">
+      <label for="reserve_price">Reserve Price</label>
+      <input type="text" name="reserve_price" class="form-control" id="reserve_price" placeholder="Reserve Price" value="{{auction.reserve_price}}">
+    </div>
+    <div class="form-group">
+      <label for="shipping_location">Shipping Location of Pokemon</label>
+      <input type="text" class="form-control" name="shipping_location" id="shipping_location" placeholder="Shipping Location" value="{{auction.shipping_location}}">
+    </div>
+    <div class="form-group">
+      <label for="description">Description of Pokemon</label>
+      <input type="text" class="form-control" name="description" id="description" placeholder="Description of Pokemon" value="{{auction.description}}">
+    </div>
+    <div class="form-group">
+      <label for="auction_length">Amount of time allowed for bidding (Min. 1 hour)</label>
+      <input type="number" class="form-control" name="auction_length" id="auction_length" placeholder="Auction Length" value="{{auction.auction_length}}">
+    </div>
+    <button class="btn btn-info" type="submit">Update Auction</button>
+    <a href="/dashboard" class="btn btn-warning"> Back to dashboard</a>
+  </form>
+  <form action="/auction/delete/{{auction.id}}" method="POST" style="margin-top: 20px;">
+    <button class="btn btn-danger" type="submit"> Remove Auction </button>
+  </form>
+  {{else}}
+    <p> This auction has <strong> ended </strong></p>
+    <p> Reserve Price: ${{auction.reserve_price}} </p>
+    <p> Shipping Location of pokemon in Zipcode: {{auction.shipping_location}}</p>
+    <p> Desription of Pokemon: {{auction.description}} </p>
+    <p> Amount of time allowed for bidding: {{auction.auction_length}} hours</p>
+
+    <a href="/dashboard" style="margin-top: 20px; display: inline-block"> Back to dashboard </a>
+  {{/if}}
+
+</div>
