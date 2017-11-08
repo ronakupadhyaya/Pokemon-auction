@@ -11,7 +11,7 @@ module.exports = function(db) {
     if (! req.user) {
       res.redirect('/login');
     } else {
-      console.log(req.user)
+      console.log(req.user);
       next();
     }
   });
@@ -40,8 +40,8 @@ module.exports = function(db) {
                  parseInt(req.body.phone)] // 9
       };
       db.query(query)
-      .then(resp => res.json({resp}))
-      .catch(err => res.json({err}));
+      .then(resp => res.redirect('profile'))
+      .catch(err => res.render('profile', {title: 'Profile', user: req.user, error: 'postgres query was bad'}));
     }
   });
 
