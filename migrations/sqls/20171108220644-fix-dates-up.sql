@@ -1,0 +1,10 @@
+alter table bids drop column bid_time;
+alter table bids add column bid_time timestamp with time zone;
+alter table auctions drop column duration;
+alter table auctions drop column start;
+alter table auctions drop column creation;
+alter table auctions add column start_time timestamp with time zone;
+alter table auctions add column end_time timestamp with time zone;
+alter table auctions add column creation_time timestamp with time zone;
+alter table users drop column first_name;
+alter table users drop column last_name;

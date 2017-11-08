@@ -1,14 +1,43 @@
-<h3>Auction page</h3>
-
-<p>Pokemon: {{auction.name}}</p>
-<p>Description: {{auction.description}}</p>
-<img src={{auction.picture}}>
-<p>Shipping Location: {{auction.shipping_location}}</p>
-<p>Opening Bid: ${{auction.opening_bid}}</p>
-<a class="btn btn-primary" href="/bid/{{auction.id}}">Place Bid</a>
-
-
-{{#if editable}}
-<a class="btn btn-primary" href="/edit/auction/{{auction.id}}">Edit</a>
-<a class="btn btn-primary" href="/delete/{{auction.id}}">Delete Auction</a>
-{{/if}}
+<a href="/dashboard">< Back to Dashboard</a>
+<div style="display: flex; justify-content: center">
+  <div style="text-align: center; margin-top: 20px; margin-right: 10px; border: 0.5px solid gray; padding: 30px 30px 30px 30px">
+    <h3>Auction: {{auction.name}}</h3>
+    <p>type: {{auction.type}}</p>
+    <p>Description: {{auction.description}}</p>
+    <img src={{auction.picture}}>
+    <p>seller: {{auction.username}}</p>
+    <p>Shipping Location: {{auction.shipping_location}}</p>
+    <p>Opening Bid: ${{auction.opening_bid}}</p>
+    <div style="padding: 10px; margin: 10px; display: flex; flex-direction: column; align-items: space-around">
+      {{#if editable}}
+      <div style="margin-top: 15px; display: flex; justify-content: space-around">
+        <a class="btn btn-primary" href="/edit/auction/{{auction.id}}">Edit</a>
+        <a class="btn btn-primary" href="/delete/{{auction.id}}">Delete Auction</a>
+      {{/if}}
+      </div>
+    </div>
+  </div>
+  <div style="display: flex; flex-direction: column; margin-right: 10px; justify-content: space-around">
+  <div style="margin-top: 20px; border: 0.5px solid gray; padding: 30px 30px 30px 30px">
+    <h5>Bid History</h5>
+    {{#each bids}}
+    {{#if bid}}
+    <p>${{bid}} | <b>{{username}}</b> at <i>{{bid_time}}</i></p>
+    {{else}}
+    <p>No bids yet.</p>
+    {{/if}}
+    {{/each}}
+  </div>
+  <div style="border: 0.5px solid gray; padding: 30px 30px 30px 30px">
+    <h5>Current Bid:</h5>
+    <p>${{highest.bid}}</p>
+    {{#unless editable}}
+    {{#if ableToBid}}
+    <a class="btn btn-primary" href="/bid/{{auction.id}}">Place New Bid</a>
+    {{else}}
+    <p>You're the highest bidder.</p>
+    {{/if}}
+    {{/unless}}
+  </div>
+  <div>
+</div>
