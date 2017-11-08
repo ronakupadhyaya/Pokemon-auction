@@ -4,7 +4,7 @@
     "es6": true
   },
   "parserOptions": {
-    "ecmaVersion": 6
+    "ecmaVersion": 2017
   },
   "extends": "eslint:recommended",
   "rules": {
@@ -18,7 +18,10 @@
     "no-console": 0,
     "quotes": 0,
     "guard-for-in": 2,
-    "no-unused-vars": [2, { "args": "none", "vars": "local"}],
+    "no-unused-vars": [2, {
+      "args": "none",
+      "vars": "local"
+    }],
     "eqeqeq": 2,
     "no-native-reassign": 2
   }
