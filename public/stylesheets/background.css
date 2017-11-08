@@ -1,0 +1,13 @@
+.rainbowRocket{
+  background-image: url('https://i.imgur.com/bvWPfwH.png');
+  background-repeat: no-repeat;
+  /*background-position: center;*/
+  background-position: 50% -20%;
+}
+
+.resize-logo{
+  height: auto;
+  width: auto;
+  /*max-width: 79px;*/
+  max-width: 200px;
+}

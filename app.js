@@ -13,9 +13,10 @@ var routes = require('./routes/routes');
 var db = require('./pool.js');
 
 var app = express();
+var exphbs = require('express-handlebars')
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.engine('hbs', exphbs({defaultLayout: 'layout', extname: '.hbs'}));
 app.set('view engine', 'hbs');
 
 // uncomment after placing your favicon in /public
@@ -30,14 +31,39 @@ app.use(session({keys: [process.env.SECRET || 'h0r1z0n5']}))
 // Passport
 passport.serializeUser(function(user, done) {
   // YOUR CODE HERE
+  done(null, user.id);
 });
 
 passport.deserializeUser(function(id, done) {
   // YOUR CODE HERE
+  db.query(`SELECT id from users WHERE id = $1;`, [id])
+    .then((result) => {
+      let user = result.rows;
+      if(!user){
+        done(false, false);
+        return;
+      }
+      done(false, user);
+    })
+    .catch((err) => {
+      done(err);
+      console.log('Error: ' + err);
+    });
 });
 
 passport.use(new LocalStrategy(function(username, password, done) {
   // YOUR CODE HERE
+  db.query(`SELECT username FROM users WHERE username = '$1';`, [username])
+    .then((result) => {
+      console.log('User', result);
+      let user = result.rows;
+      if (!user) { return done(null, false); }
+      if (!user.verifyPassword(password)) { return done(null, false); }
+      return done(null, user);
+    })
+    .catch((err) => {
+      if (err) { return done(err); }
+    });
 }));
 
 app.use(passport.initialize());
@@ -66,6 +92,3 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
-
-
-

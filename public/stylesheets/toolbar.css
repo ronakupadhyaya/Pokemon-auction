@@ -1,0 +1,12 @@
+.buttonImage {
+  /*flex: 1;*/
+  /*padding-left: 20px;*/
+  display: inline-block;
+}
+
+.resize-icon{
+  height: auto;
+  width: auto;
+  /*max-width: 79px;*/
+  max-height: 50px;
+}

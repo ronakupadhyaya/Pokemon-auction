@@ -5,18 +5,26 @@
   {{error}}
 </div>
 {{/if}}
-<form method="POST" style="max-width: 300px; margin: auto; margin-top: 50px; border: 0.5px solid gray; padding: 30px 30px 30px 30px">
-  <h3>Login</h3>
-  <div class="form-group">
-    <label>Username</label>
-    <input type="text" name="username" class="form-control">
+<body class='rainbowRocket'>
+  <div>
+    <form method="POST" style="max-width: 350px; margin: auto; margin-top: 100px; border: 0.5px solid gray; background-color: white; padding: 30px 30px 30px 30px">
+      <center>
+        <img class="resize-logo" src='https://i.imgur.com/Xsk67RZ.png'>
+      </center>
+      <div class="form-group">
+        <label>Username</label>
+        <input type="text" name="username" class="form-control">
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" name="password" class="form-control">
+      </div>
+      <center>
+        <div class="form-group">
+          <button class="btn btn-success">Login</button>
+          <a class="btn btn-primary" href="/register">Register</a>
+        </div>
+      </center>
+    </form>
   </div>
-  <div class="form-group">
-    <label>Password</label>
-    <input type="password" name="password" class="form-control">
-  </div>
-  <div class="form-group">
-    <button class="btn btn-success">Login</button>
-    <a class="btn btn-primary" href="/register">Register</a>
-  </div>
-</form>
+</body>
