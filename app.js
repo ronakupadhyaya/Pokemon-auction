@@ -1,6 +1,6 @@
 var express = require('express');
 var path = require('path');
-var favicon = require('serve-favicon');
+// var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
@@ -26,7 +26,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({keys: [process.env.SECRET || 'h0r1z0n5']}))
+app.use(session({keys: [process.env.SECRET || 'h0r1z0n5']}));
 
 // Passport
 passport.serializeUser(function(user, done) {
@@ -39,26 +39,25 @@ passport.deserializeUser(function(id, done) {
   db.query(`SELECT id from users WHERE id = $1;`, [id])
     .then((result) => {
       let user = result.rows;
-      if(!user){
-        done(false, false);
-        return;
-      }
-      done(false, user);
+      if (!user) {done(false, false);}
+      else {done(false, user);}
     })
     .catch((err) => {
       done(err);
-      console.log('Error: ' + err);
+      console.log(err);
     });
 });
 
 passport.use(new LocalStrategy(function(username, password, done) {
   // YOUR CODE HERE
-  db.query(`SELECT username FROM users WHERE username = '$1';`, [username])
+  db.query(`SELECT * FROM users WHERE username = $1;`, [username])
     .then((result) => {
-      console.log('User', result);
-      let user = result.rows;
+      console.log('User', result.rows[0]);
+      let user = result.rows[0];
       if (!user) { return done(null, false); }
-      if (!user.verifyPassword(password)) { return done(null, false); }
+      if (user.password !== password) {
+        return done(null, false, { message: 'Incorrect password.' });
+      }
       return done(null, user);
     })
     .catch((err) => {
@@ -70,8 +69,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Routes
-app.use('/', auth(passport));
-app.use('/', routes());
+app.use('/', auth(passport, db));
+app.use('/', routes(db));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
