@@ -45,7 +45,7 @@ passport.deserializeUser(function(id, done) {
         done(null, res.rows[0]);
       }  else {
         console.log('length not greater than 0');
-        done('error', null);
+        done(null, false);
       }
     }
   })

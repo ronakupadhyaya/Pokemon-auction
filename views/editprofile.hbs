@@ -1,0 +1,14 @@
+<h1> Editing Profile </h1>
+
+<form action="/update" method = "post">
+  Username <input type="text" name="username" value={{user.username}}><br>
+  Password <input type="text" name="password" value={{user.password}}><br>
+  Email <input type="text" name="email" value={{user.email}}><br>
+  Phone <input type="text" name="phone" value={{user.phone}}><br>
+  Street <input type="text" name="street" value={{user.street}}><br>
+  City <input type="text" name="city" value={{user.city}}><br>
+  State <input type="text" name="state" value={{user.state}}><br>
+  Country <input type="text" name="country" value={{user.country}}><br>
+  Postal <input type="text" name="zipcode" value={{user.postal}}><br>
+  <input type="submit" value="Update">
+</form>
