@@ -2,24 +2,46 @@
 <div style="display: flex; justify-content: center">
   <div style="text-align: center; margin-top: 20px; margin-right: 10px; border: 0.5px solid gray; padding: 30px 30px 30px 30px">
     <h3>Auction: {{auction.name}}</h3>
-    <p>type: {{auction.type}}</p>
-    <p>Description: {{auction.description}}</p>
+    type: {{auction.type}}<br/>
+    Description: {{auction.description}}<br/>
     <img src={{auction.picture}}>
     <p>seller: {{auction.username}}</p>
-    <p>Shipping Location: {{auction.shipping_location}}</p>
-    <p>Opening Bid: ${{auction.opening_bid}}</p>
+    <i>started: {{auction.start_time}}</i><br/>
+    <i>ends: {{auction.end_time}}</i><br/>
+    {{#if timeLeft}}
+    <p><b>time left: {{timeLeft}}</b></p>
+    {{/if}}
+    <p>Shipping from: {{auction.shipping_location}}</p>
+    {{#if editable}}
     <div style="padding: 10px; margin: 10px; display: flex; flex-direction: column; align-items: space-around">
-      {{#if editable}}
       <div style="margin-top: 15px; display: flex; justify-content: space-around">
-        <a class="btn btn-primary" href="/edit/auction/{{auction.id}}">Edit</a>
-        <a class="btn btn-primary" href="/delete/{{auction.id}}">Delete Auction</a>
-      {{/if}}
+        <a class="btn btn-primary" href="/edit/auction/{{auctionId}}">Edit</a>
+        <a class="btn btn-primary" href="/delete/{{auctionId}}">Delete Auction</a>
       </div>
     </div>
+    {{/if}}
   </div>
   <div style="display: flex; flex-direction: column; margin-right: 10px; justify-content: space-around">
+    <div style="margin-top: 20px; border: 0.5px solid gray; padding: 30px 30px 30px 30px">
+      <p><b>Opening Bid:</b> ${{auction.opening_bid}}</p>
+      {{#if highest.bid}}
+      <p><b>{{#if timeLeft}}Current Bid:{{else}}Ending bid:{{/if}}</b> ${{highest.bid}}</p>
+      {{/if}}
+      {{#if timeLeft}}
+      {{#unless editable}}
+      {{#if ableToBid}}
+      <form method="POST" action="/auction/bid/{{auctionId}}">
+        $ <input type="float" name="bid_price" value={{minBid}}>
+        <button>Place New Bid</button>
+      </form>
+      {{else}}
+      <p>You're the highest bidder.</p>
+      {{/if}}
+      {{/unless}}
+      {{/if}}
+    </div>
   <div style="margin-top: 20px; border: 0.5px solid gray; padding: 30px 30px 30px 30px">
-    <h5>Bid History</h5>
+    <h4>Bid History</h4>
     {{#each bids}}
     {{#if bid}}
     <p>${{bid}} | <b>{{username}}</b> at <i>{{bid_time}}</i></p>
@@ -28,16 +50,5 @@
     {{/if}}
     {{/each}}
   </div>
-  <div style="border: 0.5px solid gray; padding: 30px 30px 30px 30px">
-    <h5>Current Bid:</h5>
-    <p>${{highest.bid}}</p>
-    {{#unless editable}}
-    {{#if ableToBid}}
-    <a class="btn btn-primary" href="/bid/{{auction.id}}">Place New Bid</a>
-    {{else}}
-    <p>You're the highest bidder.</p>
-    {{/if}}
-    {{/unless}}
-  </div>
-  <div>
+</div>
 </div>

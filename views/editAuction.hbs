@@ -1,0 +1,16 @@
+<form method="POST">
+<h3>Auction: {{auction.name}}</h3>
+Description: <input type="text" name="description" value='{{auction.description}}'/><br/>
+<img src={{auction.picture}}>
+{{#if editStart}}
+starts: <input type="datetime-local" name="start_time" value="{{startTime}}"/> GMT-0000<br/>
+{{else}}
+started (already begun): {{auction.start_time}}<br/>
+{{/if}}
+ends: <input type="datetime-local" name="end_time" value="{{endTime}}"/> GMT-0000<br/>
+<p>Shipping from: <input type="text" name="shipping_location" value='{{auction.shipping_location}}'/></p>
+<p><b>Opening Bid: $</b> <input type="float" name="opening_bid" value='{{auction.opening_bid}}'/></p>
+<button>Save</button>
+</form>
+<a href="/auction/{{auction.id}}">Cancel</a>
+<a class="btn btn-primary" href="/delete/{{auction.id}}">Delete Auction</a>
