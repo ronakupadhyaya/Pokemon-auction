@@ -128,18 +128,32 @@ app.post('/auction/new', (req, res)=>{
   res.redirect(`/auction/${pokeId}`);
 })
 
+// join users u on (u.id = a.user_id)
+// join auction_bids b on (b.aunction_id = a.id) 
+
 app.get('/auction/:id', (req, res)=>{
   db.query(`select * from 
-  auction a join pokemon p on (a.poke_id = p.id) 
+  auction a join pokemon p on (a.poke_id = p.id)
   where a.id = $1;
-  `, [req.param.id])
+  `, [req.params.id])
   .then(function(result){
+    console.log(result.rows[0])
     res.render('auction', {auction: result.rows[0]})
   })
   .catch(function(error){
     console.log('there was an error', error)
   })
 })
+
+app.get('/auction/delete/:id', (req, res)=>{
+  db.query(`delete from auctions where id=${req.params.id}`)
+  .then(function(result){
+    console.log('auction successfully deleted!')
+  })
+  .catch(function(error){
+    console.log('there was an error', error);
+  })
+}
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

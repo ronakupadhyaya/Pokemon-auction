@@ -1,1 +1,19 @@
 <h1>You have made it to the auction page successfully</h1>
+<a href="/dashboard">Dashboard</a>
+
+<div style="border: solid; border-color: black; border-width: 5px; display: flex;
+            align-items: center; flex-direction: column;">
+    <h2>{{auction.name_poke}}</h2><a href='/auction/delete/{{auction.id}}'><input type="button" value="Cancel" class="btn btn-danger"/></a><br/>
+    <img src={{auction.picture}} alt="a picture of {{auction.name_poke}}">
+
+    <div>
+        <span>Information:</span>
+        <br/>
+        Owner:{{au}} 
+    </div>
+
+    <div>
+    <h2>Bids</h2>
+    <span>Highest Bid: By:</span>
+    </div>
+</div>
