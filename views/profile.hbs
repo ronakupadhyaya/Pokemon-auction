@@ -1,0 +1,50 @@
+<!-- Trigger the modal with a button -->
+
+
+</script>
+<h1>Edit your profile Pokemon Master: {{name.username}}</h1>
+<ul>
+  <li>Username: {{name.username}}</li><br>
+  <li>Email: {{name.email}}</li><br>
+  <li>Phone: {{name.phone}}</li><br>
+  <li>Street Address: {{name.street_address}}</li><br>
+  <li>City: {{name.city}}</li><br>
+  <li>State: {{name.state}}</li><br>
+  <li>Country: {{name.country}}</li><br>
+  <li>Zipcode: {{name.zipcode}}</li><br>
+</ul>
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Edit Profile</button>
+<button type="button" class="btn btn-info btn-lg" name="button"><a href="/dashboard">Back to DashBoard</a></button>
+
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">User Info</h4>
+      </div>
+      <div class="modal-body">
+        <form class="" action="/update" method="post">
+          <p>Username: <input type="text" name="username" value="{{name.username}}"></p>
+          <p>Email: <input type="text" name="email" value="{{name.email}}"></p>
+          <p>Phone: <input type="text" name="phone" value="{{name.phone}}"></p>
+          <p>Street Address: <input type="text" name="street" value="{{name.street_address}}"></p>
+          <p>City: <input type="text" name="city" value="{{name.city}}"></p>
+          <p>State: <input type="text" name="state" value="{{name.state}}"></p>
+          <p>Country: <input type="text" name="country" value="{{name.country}}"></p>
+          <p>Zipcode: <input type="text" name="zip" value="{{name.zipcode}}"></p>
+          <p>Type in Password to confirm changes: <input type="password" name="password1" value=""></p>
+          <input type="submit" name="submit" value="Update">
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,42 @@
+<h1>Auction page for {{name.username}}</h1>
+<form action= '/createauction' method="POST" style="max-width: 300px; margin: auto; margin-top: 50px; border: 0.5px solid gray; padding: 30px 30px 30px 30px">
+  <h3>Auction</h3>
+  <div class="form-group">
+    <label>Pokemon Name</label>
+    <select class="form-control" name="name">
+      {{#each pokemon1}}
+      <option value="{{this.id}}">{{this.name}}, type: {{this.type}}</option>
+      {{/each}}
+    </select>
+  </div>
+  <div class="form-group">
+    <label>Starting Bid</label>
+    <input type="text" name="starting_bid" class="form-control">
+  </div>
+  <div class="form-group">
+    <label>Reserve</label>
+    <input type="text" name="reserve" class="form-control">
+  </div>
+  <div class="form-group">
+    <label>Shipping Address</label>
+    <input type="text" name="street" class="form-control">
+  </div>
+  <div class="form-group">
+    <label>Description</label>
+    <input type="text" name="description" class="form-control">
+  </div>
+  <div class="form-group">
+    <label>Auction Length</label>
+    <select class="form-control" name="length">
+      <option value="1hr">1 Hour</option>
+      <option value="2hr">2 Hour</option>
+      <option value="3hr">3 Hour</option>
+      <option value="4hr">4 Hour</option>
+      <option value="24hr">24 Hour</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <button class="btn btn-success">Start Auction</button>
+    <a class="btn btn-primary" href="/dashboard">Cancel</a>
+  </div>
+</form>

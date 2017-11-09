@@ -30,22 +30,37 @@ app.use(session({keys: [process.env.SECRET || 'h0r1z0n5']}))
 // Passport
 passport.serializeUser(function(user, done) {
   // YOUR CODE HERE
+  done(null, user.id);
 });
 
 passport.deserializeUser(function(id, done) {
   // YOUR CODE HERE
+  db.query(`SELECT * FROM user_db WHERE id = $1`, [id]).then((result) => done(null, result.rows[0]))
 });
 
 passport.use(new LocalStrategy(function(username, password, done) {
   // YOUR CODE HERE
+  db.query(`SELECT * FROM user_db WHERE username = $1 AND password = $2`, [username, password])
+  .then((result) => {
+    if(result){
+    // console.log('result in LocalStrategy', result.rows)
+    done(null, result.rows[0])
+  }
+  if(!result){
+    console.log('could not find user in Database - incorrect username or password?');
+  }
+  })
+  .catch(err => {
+    console.log('error authenticating', err);
+  })
 }));
 
 app.use(passport.initialize());
 app.use(passport.session());
 
 // Routes
-app.use('/', auth(passport));
-app.use('/', routes());
+app.use('/', auth(passport, db));
+app.use('/', routes(db));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -66,6 +81,3 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
-
-
-
