@@ -154,10 +154,17 @@ module.exports = function(db) {
 
   router.get('/edit/auction/:id', (req, res, next) => {
     function convertDateTime(time){
-      const date = time.toISOString().split('T')[0];
-      console.log(date);
-      const newTime = time.toString().split(' ').slice(4);
-      console.log(newTime);
+      var returnString;
+      var date = time.toISOString().split('T')[0].split('-');
+      const newTime = time.toString().split(' ');
+      if (date[2] === newTime[2]) {
+        returnString = `${date}T${newTime[4]}`
+      } else if (parseInt(date[2]) - 1 === parseInt(newTime[2])){
+        date[2] = date[2] - 1;
+        date = date.join("-");
+        returnString = `${date}T${newTime[4]}`
+      }
+      return returnString;
     }
     async function loadEdit(){
       try{
@@ -170,10 +177,11 @@ module.exports = function(db) {
         if (editAuction.rows[0].start_time - new Date() <= 0){
           editStart = false;
         }
-        convertDateTime(editAuction.rows[0].start_time);
         const startTime = editAuction.rows[0].start_time.toISOString().slice(0, 16);
         const endTime = editAuction.rows[0].end_time.toISOString().slice(0, 16);
-        res.render('editAuction', {auction: editAuction.rows[0], startTime: startTime, endTime: endTime, editStart: editStart})
+        const nStartTime = convertDateTime(editAuction.rows[0].start_time);
+        const nEndTime = convertDateTime(editAuction.rows[0].end_time);
+        res.render('editAuction', {auction: editAuction.rows[0], startTime: nStartTime, endTime: nEndTime, editStart: editStart})
       }
       catch(e){
         console.log('error: ', e)
