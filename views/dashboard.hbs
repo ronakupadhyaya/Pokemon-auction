@@ -1,0 +1,284 @@
+
+<link rel='stylesheet' href='/stylesheets/style.css' />
+<script type="text/javascript">
+$(function(){
+    $('#login').popover({
+        placement: 'bottom',
+        html:true,
+        content:  $('#myForm').html()
+    })
+})
+</script>
+<div class="wrapper">
+
+  <div class="header">
+    <h1 class="header__title">Pokemon Auction Board</h1>
+    <h2 class="header__subtitle">JiMin and Nate</h2>
+  </div>
+
+  <div class="cards">
+
+    <div class=" card [ is-collapsed ] ">
+      <div class="card__inner [ js-expander ]">
+        <span>Card</span>
+        <i class="fa fa-folder-o"></i>
+      </div>
+      <div class="card__expander">
+        <i class="fa fa-close [ js-collapser ]"></i>
+        Expander
+      </div>
+    </div>
+
+    <div class=" card [ is-collapsed ] ">
+      <div class="card__inner [ js-expander ]">
+        <span>Card</span>
+        <i class="fa fa-folder-o"></i>
+      </div>
+      <div class="card__expander">
+        Expander
+      </div>
+    </div>
+    {{#each auctions}}
+    <div class=" card [ is-collapsed ] ">
+      <div class="card__inner [ js-expander ]">
+        <span>{{this.name}}</span>
+      </div>
+      <div class="card__expander">
+        <img src="{{this.image}}" class="image">
+        <div class="expanderText">
+          <p class="pName">{{this.name}}</p>
+          <p class="pDesc">{{this.description}}</p>
+          <p>Starting bid ${{this.bid}}. Auction ending {{this.end_date}} at {{end_time}}.</p> <br>
+          <p>{{this.street}} <br> {{this.city}}, {{this.state}} {{this.zip}} </p>
+          <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#{{this.a_id}}">
+            Edit Auction
+          </button>
+          <form  action="auction/delete/{{a_id}}" method="post">
+            <button class="btn btn-danger" type="submit">
+              Delete Auction
+            </button>
+          </form>
+          <button type="button" id="login" class="btn btn-primary">Bid</button>
+          <div id="myForm" class="hide dark-text">
+              <form action="auction/bid/{{this.a_id}}" id="popForm" method="post">
+                  <label for="email" class="dark-text">Amount</label>
+                  <input type="number" name="amount" id="email" class="form-control input-md" placeholder="$">
+                  <button type="submit" class="btn btn-primary" data-loading-text="Sending info.."><em class="icon-ok"></em> Save</button>
+              </form>
+          </div>
+          <div id="result"></div>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+  <div class="cards">
+    <a href="/profile" class='card'>
+      <div class="card__inner">
+        <span>Profile</span>
+      </div>
+    </a>
+    <a href="/auction/new" class='card'>
+      <div class="card__inner">
+        <span>New Auction</span>
+      </div>
+    </a>
+
+    <div class=" card ">
+      <div class="card__inner">
+        <span>Card</span>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+{{#each auctions}}
+<div class="modal fade bd-example-modal-lg" id="{{this.a_id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Update Auction</h4>
+      </div>
+      <div class="modal-body">
+        <form class="container-fluid" action="/auction/update/{{this.a_id}}" method="post">
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputState">Pokemon</label>
+              <select id="inputState" class="form-control" name="name">
+                <option selected>{{this.name}}</option>
+                <option>Bulbasaur</option>
+                <option>Ivysaur</option>
+                <option>Venusaur</option>
+                <option>Venusaur</option>
+                <option>Charmander</option>
+                <option>Charmeleon</option>
+                <option>Charizard</option>
+                <option>Charizard</option>
+                <option>Charizard</option>
+                <option>Squirtle</option>
+                <option>Wartortle</option>
+                <option>Blastoise</option>
+                <option>Blastoise</option>
+                <option>Caterpie</option>
+                <option>Metapod</option>
+                <option>Butterfree</option>
+                <option>Weedle</option>
+                <option>Kakuna</option>
+                <option>Beedrill</option>
+                <option>Beedrill</option>
+                <option>Pidgey</option>
+                <option>Pidgeotto</option>
+                <option>Pidgeot</option>
+                <option>Pidgeot</option>
+                <option>Rattata</option>
+                <option>Rattata</option>
+                <option>Raticate</option>
+                <option>Raticate</option>
+                <option>Spearow</option>
+                <option>Fearow</option>
+                <option>Ekans</option>
+                <option>Arbok</option>
+                <option>Pikachu</option>
+                <option>Raichu</option>
+                <option>Raichu</option>
+                <option>Sandshrew</option>
+                <option>Sandshrew</option>
+                <option>Sandslash</option>
+                <option>Sandslash</option>
+                <option>Nidoran♀</option>
+                <option>Nidorina</option>
+                <option>Nidoqueen</option>
+                <option>Nidoran♂</option>
+                <option>Nidorino</option>
+                <option>Nidoking</option>
+                <option>Clefairy</option>
+                <option>Clefable</option>
+                <option>Vulpix</option>
+                <option>Vulpix</option>
+                <option>Ninetales</option>
+                <option>Ninetales</option>
+              </select>
+            </div>
+            <div class="form-group col-md-3">
+              <label for="sb">Bid</label>
+              <input type="number" class="form-control" id="sb" placeholder="$" value="{{this.bid}}" name="bid">
+            </div>
+            <div class="form-group col-md-3">
+              <label for="rp">Reserve</label>
+              <input type="number" class="form-control" id="rp" placeholder="$" value="{{this.reserve}}"name="reserve">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="rp">Time</label>
+              <input type="time" class="form-control" id="rp" value="{{this.end_time}}" name="time">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="rp">Date</label>
+              <input type="date" class="form-control" id="rp"  value="{{this.end_date}}" name="date">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label for="inputAddress">Address</label>
+              <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" name="street" value="{{this.street}}">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="inputCity">City</label>
+                <input type="text" class="form-control" id="inputCity" name="city" value="{{this.city}}">
+              </div>
+              <div class="form-group col-md-3">
+                <label for="inputState">State</label>
+                <select id="inputState" class="form-control" name="state" >
+                  <option selected>{{this.state}}</option>
+                  <option>AK</option>
+                  <option>AL</option>
+                  <option>AR</option>
+                  <option>AS</option>
+                  <option>AZ</option>
+                  <option>CA</option>
+                  <option>CO</option>
+                  <option>CT</option>
+                  <option>DC</option>
+                  <option>DE</option>
+                  <option>FL</option>
+                  <option>GA</option>
+                  <option>GU</option>
+                  <option>HI</option>
+                  <option>IA</option>
+                  <option>ID</option>
+                  <option>IL</option>
+                  <option>IN</option>
+                  <option>KS</option>
+                  <option>KY</option>
+                  <option>LA</option>
+                  <option>MA</option>
+                  <option>MD</option>
+                  <option>ME</option>
+                  <option>MI</option>
+                  <option>MN</option>
+                  <option>MO</option>
+                  <option>MS</option>
+                  <option>MT</option>
+                  <option>NC</option>
+                  <option>ND</option>
+                  <option>NE</option>
+                  <option>NH</option>
+                  <option>NJ</option>
+                  <option>NM</option>
+                  <option>NV</option>
+                  <option>NY</option>
+                  <option>OH</option>
+                  <option>OK</option>
+                  <option>OR</option>
+                  <option>PA</option>
+                  <option>PR</option>
+                  <option>RI</option>
+                  <option>SC</option>
+                  <option>SD</option>
+                  <option>TN</option>
+                  <option>TX</option>
+                  <option>UT</option>
+                  <option>VA</option>
+                  <option>VI</option>
+                  <option>VT</option>
+                  <option>WA</option>
+                  <option>WI</option>
+                  <option>WV</option>
+                  <option>WY</option>
+                </select>
+              </div>
+              <div class="form-group col-md-3">
+                <label for="inputZip">Zip</label>
+                <input type="text" class="form-control" id="inputZip" name="zip" value="{{this.zip}}">
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label for="exampleFormControlTextarea1">Pokemon Description</label>
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description">{{this.description}}</textarea>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6 ">
+              <button type="submit" class="btn btn-primary btn-block">Submit</button>
+            </div>
+            <div class="form-group col-md-6">
+              <a href="/dashboard" type="button" class="btn btn-block btn-danger">Cancel</a>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
+{{/each}}
+<script type='text/javascript' src='/scripts/dash.js'></script>

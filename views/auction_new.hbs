@@ -1,0 +1,176 @@
+<link rel='stylesheet' href='/stylesheets/auction_new.css' />
+<div class="wrapper">
+  <div class="header">
+    <h1 class="header__title">New Pokemon Auction</h1>
+  </div>
+  <form class="container-fluid" action="/auction/new" method="post">
+    <div class="form-row">
+      <div class="form-group col-md-3">
+        <label for="inputState">Pokemon</label>
+        <select id="inputState" class="form-control" name="name">
+          <option selected>Choose...</option>
+          <option>Bulbasaur</option>
+          <option>Ivysaur</option>
+          <option>Venusaur</option>
+          <option>Venusaur</option>
+          <option>Charmander</option>
+          <option>Charmeleon</option>
+          <option>Charizard</option>
+          <option>Charizard</option>
+          <option>Charizard</option>
+          <option>Squirtle</option>
+          <option>Wartortle</option>
+          <option>Blastoise</option>
+          <option>Blastoise</option>
+          <option>Caterpie</option>
+          <option>Metapod</option>
+          <option>Butterfree</option>
+          <option>Weedle</option>
+          <option>Kakuna</option>
+          <option>Beedrill</option>
+          <option>Beedrill</option>
+          <option>Pidgey</option>
+          <option>Pidgeotto</option>
+          <option>Pidgeot</option>
+          <option>Pidgeot</option>
+          <option>Rattata</option>
+          <option>Rattata</option>
+          <option>Raticate</option>
+          <option>Raticate</option>
+          <option>Spearow</option>
+          <option>Fearow</option>
+          <option>Ekans</option>
+          <option>Arbok</option>
+          <option>Pikachu</option>
+          <option>Raichu</option>
+          <option>Raichu</option>
+          <option>Sandshrew</option>
+          <option>Sandshrew</option>
+          <option>Sandslash</option>
+          <option>Sandslash</option>
+          <option>Nidoran♀</option>
+          <option>Nidorina</option>
+          <option>Nidoqueen</option>
+          <option>Nidoran♂</option>
+          <option>Nidorino</option>
+          <option>Nidoking</option>
+          <option>Clefairy</option>
+          <option>Clefable</option>
+          <option>Vulpix</option>
+          <option>Vulpix</option>
+          <option>Ninetales</option>
+          <option>Ninetales</option>
+        </select>
+      </div>
+      <div class="form-group col-md-3">
+        <label for="sb">Starting Bid</label>
+        <input type="number" class="form-control" id="sb" placeholder="Starting Bid" name="bid">
+      </div>
+      <div class="form-group col-md-2">
+        <label for="rp">Reserve Price</label>
+        <input type="number" class="form-control" id="rp" placeholder="Reserve Price" name="reserve">
+      </div>
+      <div class="form-group col-md-2">
+        <label for="rp">End time</label>
+        <input type="time" class="form-control" id="rp" value="12:00pm" name="time">
+      </div>
+      <div class="form-group col-md-2">
+        <label for="rp">End Date</label>
+        <input type="date" class="form-control" id="rp"  name="date">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-12">
+        <label for="inputAddress">Address</label>
+        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" name="street">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputCity">City</label>
+          <input type="text" class="form-control" id="inputCity" name="city">
+        </div>
+        <div class="form-group col-md-4">
+          <label for="inputState">State</label>
+          <select id="inputState" class="form-control" name="state" >
+            <option selected>Choose...</option>
+            <option>AK</option>
+            <option>AL</option>
+            <option>AR</option>
+            <option>AS</option>
+            <option>AZ</option>
+            <option>CA</option>
+            <option>CO</option>
+            <option>CT</option>
+            <option>DC</option>
+            <option>DE</option>
+            <option>FL</option>
+            <option>GA</option>
+            <option>GU</option>
+            <option>HI</option>
+            <option>IA</option>
+            <option>ID</option>
+            <option>IL</option>
+            <option>IN</option>
+            <option>KS</option>
+            <option>KY</option>
+            <option>LA</option>
+            <option>MA</option>
+            <option>MD</option>
+            <option>ME</option>
+            <option>MI</option>
+            <option>MN</option>
+            <option>MO</option>
+            <option>MS</option>
+            <option>MT</option>
+            <option>NC</option>
+            <option>ND</option>
+            <option>NE</option>
+            <option>NH</option>
+            <option>NJ</option>
+            <option>NM</option>
+            <option>NV</option>
+            <option>NY</option>
+            <option>OH</option>
+            <option>OK</option>
+            <option>OR</option>
+            <option>PA</option>
+            <option>PR</option>
+            <option>RI</option>
+            <option>SC</option>
+            <option>SD</option>
+            <option>TN</option>
+            <option>TX</option>
+            <option>UT</option>
+            <option>VA</option>
+            <option>VI</option>
+            <option>VT</option>
+            <option>WA</option>
+            <option>WI</option>
+            <option>WV</option>
+            <option>WY</option>
+          </select>
+        </div>
+        <div class="form-group col-md-2">
+          <label for="inputZip">Zip</label>
+          <input type="text" class="form-control" id="inputZip" name="zip">
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-12">
+        <label for="exampleFormControlTextarea1">Pokemon Description</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description"></textarea>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6 ">
+        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+      </div>
+      <div class="form-group col-md-6">
+        <a href="/dashboard" type="button" class="btn btn-block btn-danger">Cancel</a>
+      </div>
+    </div>
+  </form>
+</div>
