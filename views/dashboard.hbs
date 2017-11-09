@@ -1,0 +1,271 @@
+<link rel='stylesheet' href='/stylesheets/style.css' />
+<script type="text/javascript">
+$(function(){
+  $('#bid').popover({
+    placement: 'top',
+    html:true,
+    content:  $('#myForm').html()
+  }).on('click', function(){
+    $('.btn-primary').click(function(){
+      $('#pops').popover('hide')
+    })
+  })
+});
+
+</script>
+<div class="wrapper">
+
+  <div class="header">
+    <h1 class="header__title">Pokemon Auction</h1>
+    <h2 class="header__subtitle">By Nate and JiMin</h2>
+  </div>
+
+  <div class="cards">
+    <a class="btn" href="http://localhost:3000/profile">View Profile</a>
+    <a class="btn" href="http://localhost:3000/auction/new">Create New Auction</a>
+
+    <!-- <div class=" card [ is-collapsed ] ">
+      <div class="card__inner [ js-expander ]">
+        <span>Card</span>
+        <i class="fa fa-folder-o"></i>
+      </div>
+      <div class="card__expander">
+        <i class="fa fa-close [ js-collapser ]"></i>
+        Expander
+      </div>
+    </div> -->
+    {{#each auctions}}
+    <div class=" card [ is-collapsed ] ">
+      <div class="card__inner [ js-expander ]">
+        <span>Your Auction for {{this.name}}</span>
+        <i class="fa fa-folder-o"></i>
+      </div>
+      <div class="card__expander">
+        <i class="fa fa-close [ js-collapser ]"></i>
+        <img src={{this.picture}}>
+        <ul>
+          <li>Starting Bid: ${{this.opening_bid}}</li>
+          <li>Reserved Price: ${{reserve_price}}</li>
+          <li>Address: {{this.street}}, {{this.city}}, {{this.state}} {{this.zipcode}}</li>
+          <li>Description: {{this.description}}</li>
+          <li>Start date: {{this.start_date}} {{this.start_time}}</li>
+          <li>End date: {{this.end_date}} {{this.end_time}}</li>
+        </ul>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Edit Auction</button>
+        <form action="/auction/delete/{{this.a_id}}" method='post'>
+          <button type="submit" class="btn btn-danger">Delete Auction</button>
+        </form>
+        <div class="modal fade" id="myModal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h4 class="modal-title">Edit Auction</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+
+              <!-- Modal body -->
+              <div class="modal-body">
+                <form action="/auction/edit/{{this.a_id}}" method="POST">
+                  <div class="form-row">
+                    <div class="form-group col-sm-4">
+                      <label for="pokemon_name">Pokemon</label>
+                      <select id="pokemon_list" class='form-control' name='pokemon'>
+                        {{#each ../pokemon}}
+                        <option value={{this.id}}>{{this.name}}</option>
+                        {{/each}}
+                      </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label for="starting_bid">Starting Bid</label>
+                      <input type="text" class="form-control" name="opening_bid" value={{this.opening_bid}} >
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-4">
+                      <label for="reserve_price">Reserve Price</label>
+                      <input type="text" class="form-control" name="reserve_price" value={{this.reserve_price}}>
+                    </div>
+                    <div class="form-row">
+                      <div class="form-group col-md-12">
+                        <label for="inputAddress">Address</label>
+                        <input type="text" class="form-control" name="street" value="{{this.street}}">
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <label for="inputCity">City</label>
+                        <input type="text" class="form-control" name="city" value="{{this.city}}">
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label for="inputState">State</label>
+                        <select id="inputState" class="form-control" name="state">
+                          <option value={{this.state}} selected="selected">Select a State</option>
+                          <option value="AL">Alabama</option>
+                          <option value="AK">Alaska</option>
+                          <option value="AZ">Arizona</option>
+                          <option value="AR">Arkansas</option>
+                          <option value="CA">California</option>
+                          <option value="CO">Colorado</option>
+                          <option value="CT">Connecticut</option>
+                          <option value="DE">Delaware</option>
+                          <option value="DC">District Of Columbia</option>
+                          <option value="FL">Florida</option>
+                          <option value="GA">Georgia</option>
+                          <option value="HI">Hawaii</option>
+                          <option value="ID">Idaho</option>
+                          <option value="IL">Illinois</option>
+                          <option value="IN">Indiana</option>
+                          <option value="IA">Iowa</option>
+                          <option value="KS">Kansas</option>
+                          <option value="KY">Kentucky</option>
+                          <option value="LA">Louisiana</option>
+                          <option value="ME">Maine</option>
+                          <option value="MD">Maryland</option>
+                          <option value="MA">Massachusetts</option>
+                          <option value="MI">Michigan</option>
+                          <option value="MN">Minnesota</option>
+                          <option value="MS">Mississippi</option>
+                          <option value="MO">Missouri</option>
+                          <option value="MT">Montana</option>
+                          <option value="NE">Nebraska</option>
+                          <option value="NV">Nevada</option>
+                          <option value="NH">New Hampshire</option>
+                          <option value="NJ">New Jersey</option>
+                          <option value="NM">New Mexico</option>
+                          <option value="NY">New York</option>
+                          <option value="NC">North Carolina</option>
+                          <option value="ND">North Dakota</option>
+                          <option value="OH">Ohio</option>
+                          <option value="OK">Oklahoma</option>
+                          <option value="OR">Oregon</option>
+                          <option value="PA">Pennsylvania</option>
+                          <option value="RI">Rhode Island</option>
+                          <option value="SC">South Carolina</option>
+                          <option value="SD">South Dakota</option>
+                          <option value="TN">Tennessee</option>
+                          <option value="TX">Texas</option>
+                          <option value="UT">Utah</option>
+                          <option value="VT">Vermont</option>
+                          <option value="VA">Virginia</option>
+                          <option value="WA">Washington</option>
+                          <option value="WV">West Virginia</option>
+                          <option value="WI">Wisconsin</option>
+                          <option value="WY">Wyoming</option>
+                        </select>
+                      </div>
+                      <div class="form-group col-md-2">
+                        <label for="inputZip">Zip</label>
+                        <input type="number" class="form-control" name="zipcode" value={{this.zipcode}}>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-12">
+                    <label for="description">Description</label>
+                    <input type="text" class="form-control" name="description" value="{{this.description}}">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="start_date">Auction Start Day</label>
+                    <input type="date" class="form-control" name="start_date" value={{this.start_date}}>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="start_time">Auction Start Hour</label>
+                    <input type="time" class="form-control" name="start_time" value={{this.start_time}}>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="end_date">Auction End Day</label>
+                    <input type="date" class="form-control" name="end_date" value={{this.end_date}}>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="end_time">Auction End Hour</label>
+                    <input type="time" class="form-control" name="end_time" value={{this.end_time}}>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <button type="submit" class="btn btn-primary btn-block">Confirm Information</button>
+                  <a class="btn btn-primary btn-block" href="http://localhost:3000/dashboard">Cancel</a>
+                </div>
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  {{/each}}
+  {{#each otherAuction}}
+  <div class=" card [ is-collapsed ] ">
+    <div class="card__inner [ js-expander ]">
+      <span>Trending Auction for {{this.name}}</span>
+      <i class="fa fa-folder-o"></i>
+    </div>
+    <div class="card__expander">
+      <i class="fa fa-close [ js-collapser ]"></i>
+      <img src={{this.picture}}>
+      <ul>
+        <li>Starting Bid: ${{this.opening_bid}}</li>
+        <li>Reserved Price: ${{reserve_price}}</li>
+        <li>Address: {{this.street}}, {{this.city}}, {{this.state}} {{this.zipcode}}</li>
+        <li>Description: {{this.description}}</li>
+        <li>Start date: {{this.start_date}} {{this.start_time}}</li>
+        <li>End date: {{this.end_date}} {{this.end_time}}</li>
+      </ul>
+      <button id="bid" class="btn btn-success">Bid</button>
+      <div id="myForm" class="hide">
+        <form action="/auction/bid/{{this.au_id}}" id="popForm" method="post">
+          <div>
+            <label for="bidding">Bidding Amount: </label>
+            <input type="text" name="amount" class="form-control input-md">
+            <button type="submit" class="btn btn-primary" data-loading-text="Sending info..">Bid</button>
+          </div>
+        </form>
+      </div>
+      <div id="result"></div>
+    </div>
+  </div>
+  {{/each}}
+</div>
+
+</div>
+
+</div>
+
+<script type="text/javascript">
+var $cell = $('.card');
+
+//open and close card when clicked on card
+$cell.find('.js-expander').click(function() {
+
+  var $thisCell = $(this).closest('.card');
+
+  if ($thisCell.hasClass('is-collapsed')) {
+    $cell.not($thisCell).removeClass('is-expanded').addClass('is-collapsed').addClass('is-inactive');
+    $thisCell.removeClass('is-collapsed').addClass('is-expanded');
+
+    if ($cell.not($thisCell).hasClass('is-inactive')) {
+      //do nothing
+    } else {
+      $cell.not($thisCell).addClass('is-inactive');
+    }
+
+  } else {
+    $thisCell.removeClass('is-expanded').addClass('is-collapsed');
+    $cell.not($thisCell).removeClass('is-inactive');
+  }
+});
+
+//close card when click on cross
+$cell.find('.js-collapser').click(function() {
+
+  var $thisCell = $(this).closest('.card');
+
+  $thisCell.removeClass('is-expanded').addClass('is-collapsed');
+  $cell.not($thisCell).removeClass('is-inactive');
+
+});
+</script>

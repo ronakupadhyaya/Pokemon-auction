@@ -1,0 +1,27 @@
+.container{
+  margin: 5em auto;
+  max-width: 1000px;
+  background-color: #fff;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.06);
+  padding: 30px;
+}
+
+body{
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background: #eceef1;
+  font-family: 'Slabo 27px', serif;
+  color: #333a45;
+}
+
+.header {
+  padding: 30px;
+  text-align: center;
+}
+
+.header__title {
+  text-transform: uppercase;
+  font-size: 2.5em;
+  font-weight: 500;
+  line-height: 1.1;
+}

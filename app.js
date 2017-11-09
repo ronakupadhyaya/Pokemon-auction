@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var passport = require('passport');
 var LocalStrategy = require('passport-local');
 var session = require('cookie-session');
+var bcrypt = require('bcrypt');
 
 var auth = require('./routes/auth');
 var routes = require('./routes/routes');
@@ -25,27 +26,42 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({keys: [process.env.SECRET || 'h0r1z0n5']}))
+app.use(session({keys: [process.env.SECRET || 'h0r1z0n5']}));
 
 // Passport
 passport.serializeUser(function(user, done) {
-  // YOUR CODE HERE
+  done(null, user.id);
 });
 
 passport.deserializeUser(function(id, done) {
-  // YOUR CODE HERE
+  db.query(`SELECT * FROM users WHERE id = $1`,[id])
+  .then(user => done(null, user.rows[0]))
+  .catch((err) => {throw new Error(err);});
 });
 
 passport.use(new LocalStrategy(function(username, password, done) {
-  // YOUR CODE HERE
+  console.log('got here');
+  db.query(`SELECT * FROM users WHERE username = $1`, [username])
+  .then(user => {
+    if(user.rows.length === 0){
+      return done(null, false);
+    } else {
+      bcrypt.compare(password, user.rows[0].password, function(err, res) {
+        if(res){
+          return done(null, user.rows[0]);
+        }
+      });
+    }
+  })
+  .catch((err) => {return done(err);});
 }));
 
 app.use(passport.initialize());
 app.use(passport.session());
 
 // Routes
-app.use('/', auth(passport));
-app.use('/', routes());
+app.use('/', auth(passport, db));
+app.use('/', routes(db));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -66,6 +82,3 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
-
-
-
