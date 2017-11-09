@@ -5,6 +5,9 @@
 <p><a href='/auction/new'> Create auction </a></p>
 
 <h2> Auction View </h2>
+<a href="/dashboard" class="btn btn-primary" style="margin-bottom: 30px;display: inline-block">View all</a>
+<a href="/dashboard/running" class="btn btn-success" style="margin-bottom: 30px;display: inline-block">View Open Auctions</a>
+<a href="/dashboard/finished" class="btn btn-default" style="margin-bottom: 30px;display: inline-block">View Closed Auctions</a>
 <div style="color: red">{{error}}</div>
 <table id="table_id" class="display">
   <thead>
@@ -31,7 +34,11 @@
 
         <tr class="{{this.status}}">
           {{#if this.max_bid}}
-          <td>${{this.max_bid}}</td>
+            {{#if status}}
+            <td>${{this.max_bid}} by {{this.max_bid_user}}</td>
+            {{else}}
+            <td>${{this.max_bid}}</td>
+            {{/if}}
           {{else}}
           <td>${{this.opening_bid}}</td>
           {{/if}}

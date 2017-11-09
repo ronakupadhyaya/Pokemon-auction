@@ -33,6 +33,13 @@ module.exports = function(db) {
       });
 
   });
+  router.get('/dashboard/:status', (req, res) => {
+    db.query(`SELECT a.id, a.pokemon_id, a.opening_bid, a.reserve_price, a.auction_length, a.start_date, a.created_at, a.shipping_location, a.description, a.status, a.created_user_id, p.name, p.type, p.img_url, a.created_user_id=$1 as isCreatedByUser, (SELECT MAX(amount) from bids where auction_id=a.id) as "max_bid", (SELECT username from users as u join bids as b on (SELECT MAX(amount) from bids where auction_id=a.id) = b.amount AND u.id=b.user_id ) as max_bid_user from auction as a join pokemon as p on p.id=a.pokemon_id WHERE a.status=$2`, [req.user.id, req.params.status])
+      .then(result => {
+        console.log("finished rows", result.rows);
+        res.render('dashboard', {user: req.user, auctions: result.rows, status: req.params.status==='finished'});
+      });
+  });
   router.get('/profile', (req, res) => {
     res.render('profile', {user: req.user});
   });
