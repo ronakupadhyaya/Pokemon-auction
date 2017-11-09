@@ -1,0 +1,39 @@
+<h1>NEW AUCTION PAGE</h1>
+<a class="btn btn-info btn-md" href="/dashboard">Back to Dashboard</a>
+
+<form method="POST" style="max-width: 300px; margin: auto; margin-top: 50px; border: 0.5px solid gray; padding: 30px 30px 30px 30px">
+  <h3>Create New Auction</h3>
+  <div class="form-group">
+    <label>Pokemon Name</label>
+    <select name="pokemon" class="form-control" id="search-select">
+      {{#each pokemon}}
+      <option value={{id}}>{{id}}: {{name}}</option>
+      {{/each}}
+    </select>
+  </div>
+  <div class="form-group">
+    <label>Starting Bid</label>
+    <input type="text" name="starting_bid" class="form-control">
+  </div>
+  <div class="form-group">
+    <label>Reserve Price (must be greater than starting bid)</label>
+    <input type="text" name="reserve_price" class="form-control">
+  </div>
+  <div class="form-group">
+    <label>Shipping From</label>
+    <input type="text" name="shipping" class="form-control">
+  </div>
+  <div class="form-group">
+    <label>Description</label>
+    <input type="textarea" name="description" class="form-control">
+  </div>
+  <div class="form-group">
+    <label>Auction Length (at least 1 hour)</label>
+    <input type="text" name="length" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <button class="btn btn-success">Create</button>
+    <a class="btn btn-primary" href="/dashboard">Cancel</a>
+  </div>
+</form>

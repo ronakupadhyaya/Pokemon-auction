@@ -1,6 +1,6 @@
 var express = require('express');
 var path = require('path');
-var favicon = require('serve-favicon');
+// var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
@@ -25,27 +25,52 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({keys: [process.env.SECRET || 'h0r1z0n5']}))
+app.use(session({keys: [process.env.SECRET || 'h0r1z0n5']}));
 
 // Passport
 passport.serializeUser(function(user, done) {
   // YOUR CODE HERE
+  done(null, user.id);
 });
 
 passport.deserializeUser(function(id, done) {
   // YOUR CODE HERE
+  db.query("SELECT * FROM users WHERE id = $1", [id])
+    .then(function(user){
+      // console.log('deserilaize user is: ', user);
+      done(null, user.rows[0]);
+    })
+    .catch(function(err){
+      console.log('error deserializing', err);
+      // done(err);
+    });
 });
 
 passport.use(new LocalStrategy(function(username, password, done) {
   // YOUR CODE HERE
+  db.query("SELECT * FROM users WHERE username = $1", [username])
+    .then(function(user){
+      // console.log('local user is: ', user);
+      // console.log(user.rows[0].password);
+      // console.log(user.rows[0]);
+      if(password === user.rows[0].password){
+        done(null, user.rows[0]);
+      } else {
+        done(null, false, { message: 'Incorrect username and password.' });
+      }
+    })
+    .catch(function(err){
+      console.log('username does not exist', err);
+      done(null, false);
+    });
 }));
 
 app.use(passport.initialize());
 app.use(passport.session());
 
 // Routes
-app.use('/', auth(passport));
-app.use('/', routes());
+app.use('/', auth(passport, db));
+app.use('/', routes(db));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -66,6 +91,3 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
-
-
-

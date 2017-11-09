@@ -1,0 +1,106 @@
+<h1>WELCOME TO THE AUCTION PAGE</h1>
+<a class="btn btn-info btn-md" href="/dashboard">Back to Dashboard</a>
+
+{{#if status}}
+
+{{#if currentBid}}
+<h3>Current Bid is: {{currentBid}}</h3>
+{{else}}
+<h3>Starting Bid is: {{auction.starting_bid}}</h3>
+{{/if}}
+
+{{#if user}}
+
+<!-- Trigger the modal with a button -->
+<button type="button" class="btn btn-danger btn-md" data-toggle="modal" data-target="#deleteModal">Delete</button>
+
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" role="dialog">
+ <div class="modal-dialog">
+
+   <!-- Modal content-->
+   <div class="modal-content">
+     <div class="modal-body">
+       <h4 class="modal-title">Are You Sure You Want To Delete?</h4>
+     </div>
+     <div class="modal-footer">
+       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+       <form method="POST" action="/auction/delete/{{auction.id}}">
+         <button class="btn btn-danger btn-md">Delete</button>
+       </form>
+     </div>
+   </div>
+ </div>
+</div>
+
+<!-- Trigger the modal with a button -->
+<button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#profileModal">Update Auction</button>
+
+<!-- Modal -->
+<div class="modal fade" id="profileModal" role="dialog">
+ <div class="modal-dialog">
+
+   <!-- Modal content-->
+   <div class="modal-content">
+     <div class="modal-header">
+       <button type="button" class="close" data-dismiss="modal">&times;</button>
+       <h4 class="modal-title">Update Profile</h4>
+     </div>
+     <div class="modal-body">
+       <form method="POST" action="/auction/{{auction.id}}" style="max-width: 300px; margin: auto; margin-top: 50px; border: 0.5px solid gray; padding: 30px 30px 30px 30px">
+         <div class="form-group">
+           <label>Update Starting Bid</label>
+           <input type="text" name="starting_bid" class="form-control" value="{{auction.starting_bid}}">
+         </div>
+         <div class="form-group">
+           <label>Update Reserve Price</label>
+           <input type="text" name="reserve_price" class="form-control" value="{{auction.reserve_price}}">
+         </div>
+         <div class="form-group">
+           <label>Update Shipping Location</label>
+           <input type="text" name="shipping" class="form-control" value="{{auction.shipping_from}}">
+         </div>
+         <div class="form-group">
+           <label>Update Description</label>
+           <input type="text" name="description" class="form-control" value="{{auction.description}}">
+         </div>
+         <div class="form-group">
+           <label>Update Auction Length</label>
+           <input type="text" name="length" class="form-control" value="{{auction.auction_length}}">
+         </div>
+         <div class="form-group">
+           <button class="btn btn-success">Update</button>
+         </div>
+       </form>
+     </div>
+     <div class="modal-footer">
+       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+     </div>
+   </div>
+ </div>
+</div>
+{{else}}
+<div>
+  <form method="POST" action="/auction/bid/{{auction.id}}">
+    <div>
+      <label>Bid Amount</label>
+      <input type="text" name="bid">
+    </div>
+    <button class="btn btn-info btn-md">BID</button>
+  </form>
+</div>
+{{/if}}
+{{/if}}
+
+
+<img src="{{pokemon.image_url}}"/>
+<p>pokemon name: {{pokemon.name}}</p>
+<p>pokemon id: {{pokemon.id}}</p>
+<p>auction id: {{auction.id}}</p>
+<p>status: {{auction.status}}</p>
+<p>starting bid: {{auction.starting_bid}}</p>
+<p>reserve price: {{auction.reserve_price}}</p>
+<p>shipping from: {{auction.shipping_from}}</p>
+<p>description: {{auction.description}}</p>
+<p>auction length: {{auction.auction_length}}</p>
+<p>creator id: {{auction.creator_id}}</p>

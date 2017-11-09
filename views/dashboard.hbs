@@ -1,0 +1,7 @@
+<h1>Successfully logged in! Welcome {{user.username}}</h1>
+<a class="btn btn-info btn-md" href="/profile">Profile</a>
+<a class="btn btn-info btn-md" href="/auction/new">New Auction</a>
+{{auctions.id}}
+{{#each auctions}}
+  <a class="btn btn-info btn-md" href="/auction/{{id}}">Auction {{id}}</a>
+{{/each}}
