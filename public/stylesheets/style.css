@@ -6,3 +6,33 @@ body {
 a {
   color: #00B7FF;
 }
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 0 10px;
+}
+
+.labels {
+  align-items: flex-end;
+}
+
+.info {
+  align-items: flex-start;
+}
+
+.auction-link {
+  width: 300px;
+  margin: 10px;
+  background-color: palegreen;
+  color: black;
+  border: 3px solid blue;
+  border-radius: 5px;
+}

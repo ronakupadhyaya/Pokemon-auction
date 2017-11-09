@@ -1,0 +1,80 @@
+<h1>{{name}} ({{type}})</h1>
+
+{{#if edit}}
+
+<!-- Modal Trigger Button -->
+<div>
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editAuction">
+    Edit Auction
+  </button>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="editAuction" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {{#if error}}
+        <div class="alert alert-danger" role="alert">
+          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+          <span class="sr-only">Error:</span>
+          {{error}}
+        </div>
+        {{/if}}
+        <form method="POST" style="max-width: 300px; margin: auto; margin-top: 50px; border: 0.5px solid gray; padding: 30px 30px 30px 30px">
+          <h3>Create A New Auction</h3>
+        <div class="form-group">
+            <label>Reserve Price</lable>
+            <div class = "input-group">
+              <span class="input-group-addon">$</span>
+              <input name='reserve_price' type="number" min="0" step="0.01"
+              value={{#if reserve_price}} {{reserve_price}} {{else}} "0" {{/if}}
+              data-number-to-fixed="2" data-number-stepfactor="100"
+              class="form-control currency" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Shipping Pokemon From</label>
+            <textarea class="form-control" name="shipping" rows="4" cols="20">
+              {{#if shipping}} {{shipping}} {{/if}}
+            </textarea>
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <textarea class="form-control" name="description" rows="4" cols="20">
+              {{#if description}} {{description}} {{/if}}
+            </textarea>
+          </div>
+          <div class="form-group">
+            <label>Length of Auction</lable>
+            <div class = "input-group">
+              <span class="input-group-addon">Days:</span>
+              <input name='length' type="number" min="0"
+              value={{#if length}} {{length}} {{else}} "0" {{/if}}
+              class="form-control currency" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button class="btn btn-primary" type="submit">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{/if}}
+
+<img src={{image_url}} alt="No picture Found">
+<h3>Auction started at: {{start}}</h3>
+<h3>Auction ends at: {{end}}</h3>
+
+<a href="/dashboard">Back to the dashboard.</a>

@@ -27,6 +27,7 @@ CREATE TABLE auctions (
   seller_id INT NOT NULL,
   start DATE NOT NULL,
   auction_length INT NOT NULL,
+  shipping TEXT,
   opening_bid DECIMAL DEFAULT 0.0,
   reserve_price DECIMAL DEFAULT 0.01,
   description TEXT

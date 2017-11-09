@@ -1,0 +1,65 @@
+{{#if error}}
+<div class="alert alert-danger" role="alert">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  <span class="sr-only">Error:</span>
+  {{error}}
+</div>
+{{/if}}
+<form method="POST" style="max-width: 300px; margin: auto; margin-top: 50px; border: 0.5px solid gray; padding: 30px 30px 30px 30px">
+  <h3>Create A New Auction</h3>
+  <div class="form-group">
+    <label>Pokemon</label>
+    <select name="pokemon" class="selectpicker form-control" data-live-search="true">
+      <option selected disabled>Select Pokemon</option>
+      {{#each pokemon}}
+      <option value={{id}} data-tokens="{{type}} {{name}}">{{name}}</option>
+      {{/each}}
+    </select>
+  </div>
+  <div class="form-group">
+      <label>Opening Bid</lable>
+      <div class = "input-group">
+        <span class="input-group-addon">$</span>
+        <input name='opening_bid' type="number" min="0" step="0.01"
+        value={{#if opening_bid}} {{opening_bid}} {{else}} "0" {{/if}}
+        data-number-to-fixed="2" data-number-stepfactor="100"
+        class="form-control currency" />
+      </div>
+    </div>
+  <div class="form-group">
+    <label>Reserve Price</lable>
+    <div class = "input-group">
+      <span class="input-group-addon">$</span>
+      <input name='reserve_price' type="number" min="0" step="0.01"
+      value={{#if reserve_price}} {{reserve_price}} {{else}} "0" {{/if}}
+      data-number-to-fixed="2" data-number-stepfactor="100"
+      class="form-control currency" />
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Shipping Pokemon From</label>
+    <textarea class="form-control" name="shipping" rows="4" cols="20">
+      {{#if shipping}} {{shipping}} {{/if}}
+    </textarea>
+  </div>
+  <div class="form-group">
+    <label>Description</label>
+    <textarea class="form-control" name="description" rows="4" cols="20">
+      {{#if description}} {{description}} {{/if}}
+    </textarea>
+  </div>
+  <div class="form-group">
+    <label>Length of Auction</lable>
+    <div class = "input-group">
+      <span class="input-group-addon">Days:</span>
+      <input name='length' type="number" min="0"
+      value={{#if length}} {{length}} {{else}} "0" {{/if}}
+      class="form-control currency" />
+    </div>
+  </div>
+
+  <div class="form-group">
+    <a href="/dashboard" class="btn">Cancel</a>
+    <button class="btn btn-primary" type="submit">Submit</button>
+  </div>
+</form>

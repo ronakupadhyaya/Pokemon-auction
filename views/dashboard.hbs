@@ -1,2 +1,13 @@
-<h3>Welcome {{username}}!</h3>
+<h1>Welcome {{username}}!</h1>
 <a href="/profile">Profile</a>
+<a href="/auction/new">Create a new auction</a>
+
+{{#each auctions}}
+<div class="row">
+  <a href='/auction/{{id}}'>
+    <button class="auction-link">
+      <h2>{{id}}</h2>
+    </button>
+  </a>
+</div>
+{{/each}}

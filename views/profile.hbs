@@ -1,0 +1,129 @@
+<h1>Profile: {{username}}</h1>
+
+<!-- Modal Trigger Button -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editProfile">
+  Edit Profile
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="editProfile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {{#if error}}
+        <div class="alert alert-danger" role="alert">
+          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+          <span class="sr-only">Error:</span>
+          {{error}}
+        </div>
+        {{/if}}
+        <form method="POST" style="max-width: 300px; margin: auto; margin-top: 50px; border: 0.5px solid gray; padding: 30px 30px 30px 30px">
+          <h3>Edit Profile</h3>
+          <div class="form-group">
+            <label>Current Password (required)</label>
+            <input type="password" name="currPassword" class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Username</label>
+            <input type="text" name="username" class="form-control"
+              {{#if username}} value={{username}} {{/if}}
+            >
+          </div>
+          <div class="form-group">
+            <label>New Password</label>
+            <input type="password" name="password" class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Repeat New Password</label>
+            <input type="password" name="password2" class="form-control">
+          </div>
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" name="name_first" class="form-control"
+              {{#if name_first}} value={{name_first}} {{/if}}
+            >
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" name="name_last" class="form-control"
+              {{#if name_last}} value={{name_last}} {{/if}}
+            >
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="text" name="email" class="form-control"
+              {{#if email}} value={{email}} {{/if}}
+            >
+          </div>
+          <div class="form-group">
+            <label>Phone #</label>
+            <input type="text" name="phone" class="form-control"
+              {{#if phone}} value={{phone}} {{/if}}
+            >
+          </div>
+          <div class="form-group">
+            <label>Street Address</label>
+            <input type="text" name="street" class="form-control"
+              {{#if street}} value={{street}} {{/if}}
+            >
+          </div>
+          <div class="form-group">
+            <label>City</label>
+            <input type="text" name="city" class="form-control"
+              {{#if city}} value={{city}} {{/if}}
+            >
+          </div>
+          <div class="form-group">
+            <label>State/Province</label>
+            <input type="text" name="state" class="form-control"
+              {{#if state}} value={{state}} {{/if}}
+            >
+          </div>
+          <div class="form-group">
+            <label>Country</label>
+            <input type="text" name="country" class="form-control"
+              {{#if country}} value={{country}} {{/if}}
+            >
+          </div>
+          <div class="form-group">
+            <label>Postal Code</label>
+            <input type="text" name="zipcode" class="form-control"
+              {{#if zipcode}} value={{zipcode}} {{/if}}
+            >
+          </div>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col labels">
+    <h4>First Name:</h4>
+    <h4>Last Name:</h4>
+    <h4>Address:</h4>
+    <h4></h4>
+    <h4>Email:</h4>
+    <h4>Phone:</h4>
+  </div>
+  <div class="col info">
+    <h5>{{name_first}}</h5>
+    <h5>{{name_last}}</h5>
+    <h5>{{street_address}}</h5>
+    <h5>{{city}}{{#if city}},{{/if}} {{state}} {{country}} {{zipcode}}</h5>
+    <h5>{{email}}</h5>
+    <h5>{{phone}}</h5>
+  </div>
+</div>
+
+<a href="/dashboard">Back to the dashboard.</a>
+
+{{#if error}}<script>$('#myModal').modal('show')</script>{{/if}}
