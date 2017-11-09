@@ -1,0 +1,52 @@
+{{#if error}}
+<div class="alert alert-danger" role="alert">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  <span class="sr-only">Error:</span>
+  {{error}}
+</div>
+{{/if}}
+<form method="POST" style="max-width: 300px; margin: auto; margin-top: 50px; border: 0.5px solid gray; padding: 30px 30px 30px 30px">
+  <h3>New Auction</h3>
+  <div class="form-group">
+    <label>Pokemon Name:</label>
+    <select class="selectpicker form-control" data-live-search="true" name="pokemon_id">
+      <option value="" data-tokens="">Select Name</option>
+      {{#each pokemon}}
+        <option value={{this.id}} data-tokens="{{this.name}} {{this.type}}">{{this.name}}</option>
+      {{/each}}
+    </select>
+  </div
+  <div class="form-group">
+    <label>Opening Bid</lable>
+    <div class = "input-group">
+      <span class="input-group-addon">$</span>
+      <input type="number" name="opening_bid" value="0" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" />
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Reserve Price</lable>
+    <div class = "input-group">
+      <span class="input-group-addon">$</span>
+      <input type="number" name="reserve_price" value="0.01" min="0.01" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency"/>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Auction Length (days)</lable>
+    <input type="number" name="duration_days" value="1" min="1" step="1" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control"/>
+  </div>
+  <div class="form-group">
+    <label>Shipping From</label>
+    <input type="text" name="shipping_from" class="form-control" value={{#if name_first}}"{{name_first}}"{{else}}""{{/if}}>
+  </div>
+  <div class="form-group">
+    <label>Description</label>
+    <textarea name="description" class="form-control"></textarea>
+  </div>
+  <div class="form-group">
+    <button class="btn btn-success">Create Auction</button>
+    <button class="btn"><a href='/dashboard'>Cancel</a></button>
+  </div>
+</form>
+<script type="text/javascript">
+$('.selectpicker').selectpicker();
+</script>

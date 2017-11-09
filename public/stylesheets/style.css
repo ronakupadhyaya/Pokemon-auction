@@ -6,3 +6,12 @@ body {
 a {
   color: #00B7FF;
 }
+
+.btn a:hover {
+  text-decoration: none;
+}
+
+.thumbnail {
+  width: 50px;
+  height: 50px;
+}

@@ -1,0 +1,30 @@
+<h1>Dashboard</h1>
+<p>Welcome {{username}}</p>
+<button class='btn'><a href='/profile'>Profile</a></button>
+<button class='btn'><a href='/auction/new'>Create Auction</a></button>
+<table id="table_id">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Highest Bid</th>
+  	  <th>Posting Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each auctions}}
+    <tr>
+      <td><div class="thumbnail"><img src="{{this.image_url}}"/></div>{{this.name}}</td>
+      <td>{{this.type}}</td>
+      <td>${{this.max_bid}}</td>
+      <td>{{this.start_date}}</td>
+	 </tr>
+   {{/each}}
+  </tbody>
+</table>
+
+<script>
+  $(document).ready( function () {
+    $('#table_id').DataTable();
+  });
+</script>

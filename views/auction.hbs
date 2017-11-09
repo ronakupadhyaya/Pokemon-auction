@@ -1,0 +1,77 @@
+<h1>{{name}} - {{type}}</h1>
+<!-- Trigger/Open the Modal -->
+{{#if canEdit}}<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Edit
+</button>
+{{/if}}
+
+<div class="pokemon-img">
+  <img src="{{image_url}}">
+</div>
+{{#if pokemon_description}} <p>Description: {{pokemon_description}}</p>{{/if}}
+
+<ul>
+  {{#if start_date}}<li>Bidding began on: {{start_date}}</li>{{/if}}
+  {{#if duration_days}}<li>Duration (days): {{duration_days}}</li>{{/if}}
+  {{#if opening_bid}}<li>Opening Bid: {{opening_bid}}</li>{{/if}}
+  {{#if reserve_price}}<li>Reserve Price: {{reserve_price}}</li>{{/if}}
+  {{#if auction_description}}<li>Auction Details: {{auction_description}}</li>{{/if}}
+  {{#if shipping_from}}<li>Shipping From: {{shipping_from}}</li>{{/if}}
+</ul>
+
+{{#if canEdit}}<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Update Auction Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {{#if error}}
+        <div class="alert alert-danger" role="alert">
+          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+          <span class="sr-only">Error:</span>
+          {{error}}
+        </div>
+        {{/if}}
+        <form method="POST" action="/profile/update/{{id}}" style="max-width: 300px; margin: auto; margin-top: 50px; border: 0.5px solid gray; padding: 30px 30px 30px 30px">
+          <div class="form-group">
+            <label>Current Password (Required)</label>
+            <input type="password" name="current_password" class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Reserve Price</lable>
+            <div class = "input-group">
+              <span class="input-group-addon">$</span>
+              <input type="number" name="reserve_price" value="{{reserve_price}}" min="0.01" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Auction Length (days)</lable>
+            <input type="number" name="duration_days" value="{{duration_days}}" min="1" step="1" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control"/>
+          </div>
+          <div class="form-group">
+            <label>Shipping From</label>
+            <input type="text" name="shipping_from" class="form-control" value={{shipping_from}}>
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <textarea name="description" class="form-control" value="{{auction_description}}"></textarea>
+          </div>
+          <div class="form-group">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button class="btn btn-success">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{{/if}}
+
+<button class="btn"><a href='/dashboard'>Back</a></button>
+{{#if edit}}<script>$('#exampleModal').modal('show')</script>{{/if}}
