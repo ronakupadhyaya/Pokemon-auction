@@ -1,0 +1,17 @@
+<form action = "/delete/{{pokeInfo.inAuction}}" method = "post">
+       <input type="submit" name="delete" value="Delete Auction" />
+   </form>
+{{#if bidInfo}}
+<h1> Bid {{bidInfo.amount}} </h1>
+{{else}}
+<h1> No Bid </h1>
+{{/if}}
+
+<div>Pokemon name {{pokeInfo.name}}</div>
+<div>Pokemon type {{pokeInfo.type}}</div>
+
+<div>Auction running for {{pokeInfo.length}} hours</div>
+<div>Auction price {{pokeInfo.r_price}}</div>
+<div>Auction info {{pokeInfo.description}}</div>
+
+<a class="btn btn-primary" href="/dashboard">Dashboard</a>

@@ -1,0 +1,23 @@
+<h1> New Auction </h1>
+<form action="/auction/new" method = "post">
+  <div class="ui sub header">Search Pokemon</div>
+  <div class="ui fluid search normal selection dropdown">
+    <input type="hidden" name="pokemon_id">
+    <i class="dropdown icon"></i>
+    <div class="default text">Select Pokemon</div>
+    <div class="menu">
+      {{#each pokemon}}
+      <div class="item" data-value={{this.id}}>{{this.name}}</div>
+      {{/each}}
+    </div>
+  </div>
+
+
+  Starting Bid <input type="text" name="starting_bid"><br>
+  Reserve Price <input type="text" name="reserve_price"><br>
+  Shipping <input type="text" name="shipping"><br>
+  Description <input type="text" name="description"><br>
+  Length <input type="text" name="length"><br>
+  <a class="btn btn-primary" href="/dashboard">Cancel</a>
+  <input type="submit" value="Post">
+</form>

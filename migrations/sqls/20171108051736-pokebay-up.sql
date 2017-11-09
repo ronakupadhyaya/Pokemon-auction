@@ -19,7 +19,7 @@ CREATE TABLE pokemon (
   type varchar
 );
 
-create table auction (
+create table auctions (
   id SERIAL PRIMARY KEY,
   pokemon_id int,
   o_bid int,
@@ -34,7 +34,7 @@ create table auction (
   endAt timestamp
 );
 
-create table bid(
+create table bids(
   id SERIAL PRIMARY KEY,
   amount int,
   userId int,
