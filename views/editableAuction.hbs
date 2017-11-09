@@ -5,7 +5,11 @@
     <label>Pokemon name: {{auction.name}}</label>
   </div>
   <div class="form-group">
+    {{#if highestBid.amount}}
+    <label>Current Bid: ${{highestBid.amount}} by {{highestBid.username}}</label>
+    {{else}}
     <label>Starting Bid: ${{auction.opening_bid}}</label>
+    {{/if}}
   </div>
   <div class="form-group">
     <label>Reserve Price: ${{auction.reserve_price}}</label>
@@ -26,6 +30,11 @@
   <div class="form-group">
     <button class="btn btn-success">Save</button>
   </div>
+  <ul>
+    {{#each bids}}
+      <li>${{amount}} by {{username}}</li>
+    {{/each}}
+  </ul>
 </form>
 <a href="/auctions/{{id}}/delete">
   <button class="btn btn-danger">DELETE</button>

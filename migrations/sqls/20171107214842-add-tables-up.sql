@@ -20,8 +20,8 @@ CREATE TABLE pokemon (
 
 CREATE TABLE auctions (
   id SERIAL PRIMARY KEY,
-  fk_user_id INT REFERENCES users,
-  fk_pokemon_id INT REFERENCES pokemon,
+  fk_user_id INT REFERENCES users ON DELETE CASCADE,
+  fk_pokemon_id INT REFERENCES pokemon ON DELETE CASCADE,
   opening_bid DECIMAL,
   reserve_price DECIMAL,
   length INT,
@@ -32,8 +32,8 @@ CREATE TABLE auctions (
 
 CREATE TABLE bids (
   id SERIAL PRIMARY KEY,
-  fk_auction_id INT REFERENCES auctions,
-  fk_user_id INT REFERENCES users,
+  fk_auction_id INT REFERENCES auctions ON DELETE CASCADE,
+  fk_user_id INT REFERENCES users ON DELETE CASCADE,
   amount DECIMAL,
   created_at TIMESTAMP DEFAULT NOW()
 );
