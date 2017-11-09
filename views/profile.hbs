@@ -1,0 +1,40 @@
+<h1>Welcome {{user.username}} </h1>
+<a href="/dashboard">Dashboard</a>
+
+<h2>Update your profile infomation</h2>
+<form action='/profile' method='post'>
+  <div class="form-group">
+    <label for="street">Street:</label>
+    <input type="text" name="street" class="form-control" id="street" value="{{user.street}}">
+  </div>
+    <div class="form-group">
+    <label for="city">City:</label>
+    <input type="text" name="city" class="form-control" id="city" value="{{user.city}}">
+  </div>
+    <div class="form-group">
+    <label for="state">State:</label>
+    <input type="text" name="state" class="form-control" id="state" value="{{user.state}}">
+  </div>
+    <div class="form-group">
+    <label for="zipcode">Zipcode:</label>
+    <input type="text" name="zipcode" class="form-control" id="zipcode" value="{{user.zipcode}}">
+  </div>
+    <div class="form-group">
+    <label for="country">Country:</label>
+    <input type="text" name="country" class="form-control" id="country" value="{{user.country}}">
+  </div>
+    <div class="form-group">
+    <label for="email">Email address:</label>
+    <input type="email" name="email" class="form-control" id="email" value="{{user.email}}">
+  </div>
+    <div class="form-group">
+    <label for="phone">Phone number:</label>
+    <input type="text" name="phone" class="form-control" id="phone" value="{{user.phone}}">
+  </div>
+  </div>
+    <div class="form-group">
+    <label for="pword">Please enter your password to update your user information</label>
+    <input type="password" name="pword" class="form-control" id="pword" placeholder="password please">
+  </div>
+  <button type="submit" class="btn btn-primary">Update</button>
+</form>
