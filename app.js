@@ -13,7 +13,7 @@ var routes = require('./routes/routes');
 var db = require('./pool.js');
 
 var app = express();
-var exphbs = require('express-handlebars')
+var exphbs = require('express-handlebars');
 
 // view engine setup
 app.engine('hbs', exphbs({defaultLayout: 'layout', extname: '.hbs'}));
