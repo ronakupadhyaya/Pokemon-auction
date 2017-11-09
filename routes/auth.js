@@ -4,8 +4,6 @@
 
   module.exports = function(passport, db) {
     // YOUR CODE HERE
-
-
       router.get('/login', (req, res, next) => {
         console.log('get login.');
         res.render('login');

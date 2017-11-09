@@ -18,7 +18,16 @@ module.exports = function(db) {
 
   router.get('/dashboard', (req, res, next) => {
     console.log('get dashboard.');
-    res.render('dashboard');
+    db.query(`select * from auctions a left outer join pokemon p
+               on p.id = a.pokemon_id left outer join bids b on b.inAuction = a.id`)
+    .then((result) => {
+      console.log('result: ', result.rows);
+      res.render('dashboard', {auctions: result.rows});
+    })
+    .catch((err) => {
+      console.log('error loading dashboard', err);
+      res.render('dashboard');
+    })
   })
 
   router.get('/profile', (req, res, next) => {
@@ -60,8 +69,19 @@ module.exports = function(db) {
 
   router.post('/auction/new', (req, res, next) => {
     console.log('req.body: ', req.body);
-    db.query(`INSERT into auctions (pokemon_id, r_price,f_location,description,length) values ($1, $2, $3, $4, $5)`,
-       [req.body.pokemon_id, req.body.reserve_price, req.body.shipping, req.body.description, req.body.length])
+    let time;
+    db.query(`select current_timestamp`)
+    .then((result) => {
+      time = result.rows[0];
+    })
+    .catch((err) => {
+      console.log('error getting time for auction');
+    })
+
+
+    db.query(`INSERT into auctions (pokemon_id, r_price,f_location,description,length, user_id, createdAt, status) values ($1, $2, $3, $4, $5, $6, $7, $8)`,
+       [req.body.pokemon_id, req.body.reserve_price, req.body.shipping, req.body.description, req.body.length, req.user.id, time, 1])
+       // 1 -- open 0 -- closed
        .then(() => {
          return db.query(`select * from auctions where id >= all (select id from auctions)`)
        })
@@ -84,13 +104,15 @@ module.exports = function(db) {
   router.get('/auction/:id', (req, res, next) => {
     let pokeInfo = {};
     let bidInfo = {};
+    let id = req.params.id;
 
     console.log('got to auction id.', req.params.id);
     db.query(`select * from auctions a left outer join pokemon p
                on p.id = a.pokemon_id where a.id=$1`, [req.params.id])
     .then(result => {
-      console.log('result pokemon: ', result.rows[0]);
+      //console.log('result pokemon: ', result.rows[0]);
       pokeInfo = result.rows[0];
+      console.log('pokeInfo: ', pokeInfo.pokemon_id);
     })
     .catch((err) => {
       console.log("error joining auction and pokemon", err);
@@ -102,10 +124,10 @@ module.exports = function(db) {
                 console.log('result bid: ', result.rows);
                 if(result.rows > 0){
                   bidInfo = result.rows[0];
-                  res.render('auction', {pokeInfo, bidInfo})
+                  res.render('auction', {pokeInfo, bidInfo, id})
                 }  else {
                   console.log('no bids.');
-                  res.render('auction', {pokeInfo})
+                  res.render('auction', {pokeInfo, id})
                 }
               })
               .catch(err => "error joining auction and bids")
@@ -114,9 +136,15 @@ module.exports = function(db) {
   router.post('/delete/:id', (req, res, next) => {
     db.query(`delete from auctions where id = $1`, [req.params.id])
     .then(() => {
+      console.log('deleting..');
       res.redirect('/profile');
     })
     .catch((err) => console.log('error ', err))
+  })
+
+  router.post('/bid', (req, res, next) => {
+    req.body.amount
+
   })
 
 

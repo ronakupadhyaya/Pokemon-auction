@@ -1,4 +1,4 @@
-<form action = "/delete/{{pokeInfo.inAuction}}" method = "post">
+<form action = "/delete/{{id}}" method = "post">
        <input type="submit" name="delete" value="Delete Auction" />
    </form>
 {{#if bidInfo}}
@@ -13,5 +13,7 @@
 <div>Auction running for {{pokeInfo.length}} hours</div>
 <div>Auction price {{pokeInfo.r_price}}</div>
 <div>Auction info {{pokeInfo.description}}</div>
+
+<img src="{{pokeInfo.picture}}" width="42" height="42">
 
 <a class="btn btn-primary" href="/dashboard">Dashboard</a>

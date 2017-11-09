@@ -1,3 +1,30 @@
 <h1>Dashboard</h1>
 <a class="btn btn-primary" href="/profile">profile</a>
 <a class="btn btn-primary" href="/auction/new">Create Auction</a>
+
+{{#each auctions}}
+<div class="auction-container">
+
+  {{#if status}}
+  <form action="/auction/bid/{{@index + 1}}" method="post">
+    Amount: <input type="text" name="bid_amount"/>
+    <input type="submit" value="Bid">
+  </form>
+  {{/if}}
+
+  {{#if this.amount}}
+  <div>Highest bid amount is ${{this.amount}} </div>
+  {{else}}
+  <div> Starting amount is ${{this.r_price}} </div>
+  {{/if}}
+
+  <div>Pokemon name {{this.name}}</div>
+  <div>Pokemon type {{this.type}}</div>
+
+  <div>Auction running for {{this.length}} hours</div>
+  <div>Auction price ${{this.r_price}}</div>
+  <div>Auction info {{this.description}}</div>
+
+  <img src="{{this.picture}}" width="42" height="42">
+</div>
+{{/each}}

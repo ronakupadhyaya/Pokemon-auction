@@ -6,3 +6,8 @@ body {
 a {
   color: #00B7FF;
 }
+
+.auction-container {
+  border: 2px solid black;
+  border-radius: 12px;
+}

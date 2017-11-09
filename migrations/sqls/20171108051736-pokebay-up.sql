@@ -29,7 +29,7 @@ create table auctions (
   description varchar,
   user_id int,
   createdAt timestamp,
-  status varchar,
+  status int,
   startAt timestamp,
   endAt timestamp
 );
