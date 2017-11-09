@@ -11,7 +11,7 @@ module.exports = function(db) {
     if (! req.user) {
       res.redirect('/login');
     } else {
-      console.log(req.user);
+      // console.log(req.user);
       next();
     }
   });
@@ -20,13 +20,45 @@ module.exports = function(db) {
     getAuctions();
     async function getAuctions() {
       try {
-        const auctions = (await db.query(`
-        select max(bid), b.id, p.name, p.type, p.picture from bids b
-					left outer join auctions a on b.fk_auctions=a.id
-					left outer join pokemon p on a.fk_pokemon=p.id
-					group by b.id, p.name, p.type, p.picture
+        let auctions = (await db.query(`
+          select DISTINCT ON (a.id)
+						a.id as auction_id, a.opening_bid, a.end_time, a.start_time,
+						b.bid,
+						u.username,
+						p.name, p.type, p.picture,
+						case
+							when (extract(seconds from age(localtimestamp, a.start_time)) < 0) then 'WAITING'
+							when (extract(seconds from age(a.end_time, localtimestamp)) < 0) then 'CLOSED'
+							else 'OPEN'
+						end as status
+          from auctions a
+						full join bids b on b.fk_auctions = a.id
+						full join users u on u.id = b.fk_users
+						inner join pokemon p on p.id = a.fk_pokemon
+					order by a.id, b.bid DESC
         `)).rows;
-        console.log(auctions);
+        auctions = auctions.map(a => {
+          if (a.status === 'CLOSED') {
+            a.statusText = a.end_time.toString().slice(4, 21);
+            a.color = 'lightgrey';
+            a.bidText = 'winning bid by ' + a.username;
+          } else if (a.status === 'WAITING') {
+            a.statusText = a.start_time.toString().slice(4, 21);
+            a.color = 'lightyellow';
+            a.bidText = 'opening bid'
+          } else if (a.status === 'OPEN' && !a.bid) {
+            a.color = 'lightgreen';
+            a.bidText = 'opening bid'
+            a.input = true;
+          } else if (a.status === 'OPEN' && a.bid) {
+            a.color = 'lightblue';
+            a.bidText = 'highest bid'
+            a.input = true;
+          }
+          if (!a.bid) { a.bid = a.opening_bid; }
+          return a;
+        });
+        // console.log(auctions);
         res.render('dashboard', {auctions});
       }
       catch (err) {

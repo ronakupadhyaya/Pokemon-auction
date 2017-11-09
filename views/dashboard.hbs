@@ -9,18 +9,29 @@
 		<thead>
 			<tr>
 				<th>Name</th>
-				<th>Max Bid</th>
 				<th>Type</th>
 				<th>Image</th>
+				<th>Bids</th>
+				<th>BID!!</th>
 			</tr>
 		</thead>
 	{{#each auctions}}
-		<tr>
-			<th>{{this.name}}</th>
-			<th>{{this.max}}</th>
-			<th>{{this.type}}</th>
-			<th><img src='{{this.picture}}' /></th>
-		</tr>
+      <tr style='background-color: {{this.color}}'>
+        <th><a href='/auction/{{this.auction_id}}'>{{this.name}}</a></th>
+        <th>{{this.type}}</th>
+        <th><img style='width: 100px; height: auto' src='{{this.picture}}' /></th>
+        <th>${{this.bid}} ({{this.bidText}})</th>
+        <th>
+          {{#if this.input}}
+            <form method='POST' action='/auction/bid/{{this.auction_id}}'>
+              <input name='bid_amount' type='number' placeholder='bid amount' />
+              <input name='submit_bid' type='submit' value='BID!!' class='btn btn-default' />
+            </form>
+          {{else}}
+            {{this.status}} ({{this.statusText}})
+          {{/if}}
+        </th>
+      </tr>
   {{/each}}
 	<table>
 </div>
