@@ -1,0 +1,53 @@
+<div style="max-width: 500px; margin: auto; margin-top: 50px; border: 0.5px solid gray; padding: 30px 30px 30px 30px">
+  {{#if error}}
+    <script>
+      alert('Your bid must be at least $0.50 higher than the last bid!')
+    </script>
+  {{/if}}
+  <h3>Auction #{{id}}</h3>
+  <span>Auction owner: {{auction.username}}, {{auction.city}}</span>
+  <br>
+  <span>Start time: {{auction.auction_start}}</span>
+  <img src={{auction.image_url}} alt="">
+  <div class="form-group">
+    <label>Pokemon name: {{auction.name}}</label>
+  </div>
+  <div class="form-group">
+    {{#if highestBid.amount}}
+    <label>Current Bid: ${{highestBid.amount}} by {{highestBid.username}}</label>
+    {{else}}
+    <label>Starting Bid: ${{auction.opening_bid}}</label>
+    {{/if}}
+  </div>
+  <div class="form-group">
+    <label>Reserve Price: ${{auction.reserve_price}}</label>
+  </div>
+  <div class="form-group">
+    <label>Shipping Info: {{auction.shipping_location}}</label>
+  </div>
+  <div class="form-group">
+    <label>Description: {{auction.description}}</label>
+  </div>
+  <div class="form-group">
+    {{#if timeRemaining}}
+    <label>Time Remaining: {{timeRemaining}}</label>
+    {{else}}
+    <label>Auction Over</label>
+    {{/if}}
+  </div>
+  {{#if canBid}}
+  <form action="{{id}}/bid" method="post">
+    <input type="number" step='0.10' name="bid">
+    <button class="btn btn-success">Bid</button>
+  </form>
+  {{/if}}
+  <ul>
+    {{#each bids}}
+      <li>${{amount}} by {{username}}</li>
+    {{/each}}
+  </ul>
+</div>
+
+<a href="/dashboard">
+  <button class="btn btn-danger">GO BACK</button>
+</a>

@@ -1,0 +1,44 @@
+<h1>{{title}}</h1>
+<a href="/profile">Edit your profile</a>
+<br>
+<a href="/auction/new">Create a new auction</a>
+<br>
+<br>
+<br>
+<table id="table_id" class="stripe hover compact">
+  <thead>
+    <tr>
+	  {{#each keys}}
+      <th>{{this}}</th>
+    {{/each}}
+  </thead>
+  <tbody>
+    {{#each auctions}}
+    <tr>
+      <td style="text-align: center"><img src={{image_url}} style="width: 64px; height: 64px"/></td>
+      <td>
+        <a href="/auction/{{auction_id}}">
+          {{pokemon_name}}
+        </a>
+      </td>
+      <td>{{auction_owner_username}}</td>
+      <td>{{city}}</td>
+      <td>
+        {{#if current_bid}}
+          {{current_bid}}
+        {{else}}
+          {{opening_bid}}
+        {{/if}}
+      </td>
+      <td>{{number_bids}}</td>
+      <td data-order="{{days_remaining}}">
+        {{#if relative_time}}
+          {{relative_time}}
+        {{else}}
+          Complete
+        {{/if}}
+      </td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>

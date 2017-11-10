@@ -1,3 +1,3 @@
 $(document).ready(function () {
-  // INITIALIZE YOUR DATATABLES HERE
+  $('#table_id').DataTable();
 });
