@@ -1,0 +1,54 @@
+
+<form method="post">
+  <div class="ui fluid search selection dropdown">
+    <input type="hidden" name="pokemon">
+    <i class="dropdown icon"></i>
+    <div class="default text">Select Pokemon</div>
+    <div class="menu">
+      {{#each pokemon}}
+        <div class="item" data-value={{id}} data-text="{{name}}"><img src="{{picture}}"></img>{{name}}</div>
+      {{/each}}
+
+    </div>
+  </div>
+    <div class="form-group">
+      <label>Starting Bid</label>
+      <input type="number" step=".50" name="openingBid">
+    </div>
+    <div class="form-group">
+      <label>Reserve Price</label>
+      <input type="number" step=".50" name="reservePrice">
+    </div>
+    <div class="form-group">
+      <label>Start Date</label>
+      <input type="date" name="start_date">
+    </div>
+    <div class="form-group">
+      <label>Shipping address</label>
+      <input type="text" name="street">
+    </div>
+    <div class="form-group">
+      <label>city</label>
+      <input type="text" name="city" >
+    </div>
+    <div class="form-group">
+      <label>state</label>
+      <input type="text" name="state" >
+    </div>
+    <div class="form-group">
+      <label>zipcode</label>
+      <input type="text" name="zipcode" >
+    </div>
+    <div class="form-group">
+      <label>description</label>
+      <input type="text" name="description" >
+    </div>
+    <div class="form-group">
+      <label>length</label>
+      <input type="number" name="length" >
+    </div>
+    <submit><button class="btn btn-danger">Post</button></submit>
+    <form action="dashboard" method="get">
+      <submit><button class="btn btn-secondary">Cancel</button></submit>
+    </form>
+</form>

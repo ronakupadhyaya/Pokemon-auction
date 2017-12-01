@@ -1,0 +1,61 @@
+<div>
+  Auction page:
+  {{auction.id}}
+</div>
+
+<div class="">
+  Pokemon:
+  {{auction.name}}
+</div>
+
+<div class="">
+  <img src={{auction.picture}}></img>
+</div>
+
+<div class="">
+  Start Date: {{auction.startDate}}
+</div>
+<div class="">
+  {{auction.length}} days
+</div>
+<div class="">
+  Highest Bid: {{auction.highestBid}} poke dollars
+</div>
+
+<div >
+  <button type="button" name="bidButton" class="btn btn-danger" data-toggle="modal" data-target="#bidModal">Make a new bid</button>
+</div>
+
+<div class="form-group">
+  <a class="btn btn-primary" href="/dashboard">Dashboard</a>
+</div>
+
+<div class="modal fade" id="bidModal" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Bid for {{auction.name}}</h4>
+      </div>
+      <div class="modal-body">
+        <form class="editProfile" method="post" action="/auction/bid/{{auction.auctionId}}">
+          <div class="form-group password-prompt">
+            <label>Your bid must be at least {{auction.highestBid}} poke dollars</label>
+          </div>
+          <div class="form-contents">
+            <div class="form-group">
+              <label>Bid Amount: </label>
+              <input type="text" name="bid">
+            </div>
+            <submit><button class="btn btn-danger">Confirm Bid</button> </submit>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
